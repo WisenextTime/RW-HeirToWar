@@ -1,0 +1,26 @@
+[core]
+copyFrom:ROOT:北九星联盟/海军单位/all-units.template
+@memory 科技修正:float
+
+[hiddenAction_无科技修正]
+autoTriggerOnEvent:created
+setUnitMemory:"""
+科技修正=0,
+血量乘2=memory.血量乘2-0.2,
+伤害乘2=memory.伤害乘2-0.2"""
+[hiddenAction_获得科技修正]
+autoTrigger:if numberOfUnitsInTeam(withTag='海军总基地', greaterThan=0) and memory.科技修正==0
+setUnitMemory:"""
+科技修正=1,
+血量乘2=memory.血量乘2+0.2,
+伤害乘2=memory.伤害乘2+0.2"""
+
+[action_缺乏科技显示]
+pos:1000
+isVisible:if memory.科技修正==0
+iconImage:ROOT:全局/警告.png
+text:单位脆弱
+isLocked:true
+isLockedMessage:单位因缺少对应高级工厂脆弱\n单位血量护盾伤害降低20%
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true

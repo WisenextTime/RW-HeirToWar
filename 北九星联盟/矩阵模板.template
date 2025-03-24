@@ -1,0 +1,64 @@
+[hiddenAction_护盾接收开]
+autoTrigger:2ifnotself.shield(full=true)andnotself.tags(includes='护盾接收')
+temporarilyAddTags:护盾接收
+
+[hiddenAction_护盾接收关]
+autoTrigger:2ifself.shield(full=true)andself.tags(includes='护盾接收')
+temporarilyRemoveTags:护盾接收
+"""
+[hiddenAction_盲盒结果20]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:200
+@define r:210
+spawnUnits:坦克*5,悬浮坦克*3
+[hiddenAction_盲盒结果21]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:210
+@define r:220
+spawnUnits:坦克*5,悬浮坦克*3
+[hiddenAction_盲盒结果22]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:220
+@define r:230
+spawnUnits:重型坦克*3
+[hiddenAction_盲盒结果23]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:230
+@define r:240
+spawnUnits:等离子坦克*3
+[hiddenAction_盲盒结果24]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:240
+@define r:250
+spawnUnits:猛犸坦克*1
+[hiddenAction_盲盒结果25]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:250
+@define r:260
+spawnUnits:基础机甲*3,防空机甲*2
+[hiddenAction_盲盒结果26]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:260
+@define r:270
+spawnUnits:移动炮塔*1
+[hiddenAction_盲盒结果27]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:270
+@define r:280
+spawnUnits:激光坦克*2
+[hiddenAction_盲盒结果28]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:280
+@define r:290
+spawnUnits:自行火炮*3
+[hiddenAction_盲盒结果29]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:290
+@define r:300
+spawnUnits:重型火炮*1
+[hiddenAction_盲盒结果30]
+@copyFromSection:hiddenAction_盲盒结果0
+@define l:300
+@define r:310
+spawnUnits:重型火炮*1
+"""

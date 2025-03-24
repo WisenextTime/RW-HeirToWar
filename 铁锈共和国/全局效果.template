@@ -1,0 +1,11 @@
+[resource_瞭望塔光环]
+hidden:true
+[hiddenAction_瞭望塔光环]
+autoTrigger:if (numberOfUnitsInEnemyTeam(withTag='瞭望塔1', greaterThan=0, withInRange=640) or numberOfUnitsInEnemyTeam(withTag='瞭望塔2', greaterThan=0, withInRange=840)) and self.resource.瞭望塔光环<1
+setUnitMemory:视野乘=memory.视野乘-0.2
+setResourcesWithLogic:瞭望塔光环=1
+#showMessageToPlayer:1
+[hiddenAction_瞭望塔光环解除]
+autoTrigger:if (numberOfUnitsInEnemyTeam(withTag='瞭望塔1', lessThan=1, withInRange=640) and numberOfUnitsInEnemyTeam(withTag='瞭望塔2', lessThan=1, withInRange=640)) and self.resource.瞭望塔光环>0
+setUnitMemory:视野乘=memory.视野乘+0.2
+setResourcesWithLogic:瞭望塔光环=0

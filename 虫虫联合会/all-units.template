@@ -1,0 +1,18 @@
+[core]
+copyFrom:ROOT:all-units.template,ROOT:虫虫联合会/技能内容.template
+#此部分需要加给单位
+"""
+updateUnitMemory:globalAdd=1+self.resource.陆军加成
+or
+updateUnitMemory:globalAdd=1+self.resource.海军加成
+or
+updateUnitMemory:globalAdd=1+self.resource.空军加成
+"""
+#生物质 虫糖浆
+
+#iconImage:ROOT:陆军经验.png
+
+[hiddenAction_标签阵营]
+autoTriggerOnEvent:created
+temporarilyAddTags:虫联
+

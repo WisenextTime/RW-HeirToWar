@@ -1,0 +1,20 @@
+
+
+[hiddenAction_绑定]
+autoTrigger:if self.customTarget1.hp==0
+#takeResources_searchOnly:true
+takeResources_discardCollected:虫网节点=1
+takeResources_includeUnitsWithinRange:320
+takeResources_includeUnitsWithinRange_team:own
+takeResources_maxUnits:1
+takeResources_triggerActionForEach:绑定2
+takeResources_excludeUnitsWithoutTags:虫网节点
+
+[hiddenAction_绑定2]
+setUnitMemory:customTarget1=thisActionTarget
+
+[hiddenAction_建筑死亡]
+autoTriggerOnEvent:destroyed
+sendMessageTo:customTarget1
+sendMessageWithTags:解除占用
+sendMessageWithData:1

@@ -1,0 +1,307 @@
+#技能 200 生产单位
+#技能获取
+
+[core]
+
+[hiddenAction_白菜虫固有]
+autoTriggerOnEvent:created
+setUnitMemory:uniqueN[2001]=1,uniqueN[2002]=1,uniqueN[2003]=1,N=1
+addResourcesWithLogic:Rexp=-${core.price*0.25}
+
+[decal_技能2001]
+@define N=2001
+isVisible:if memory.unique[2001] and not memory.unique[2002]
+image:ROOT:全局/白菜虫/时间赠礼b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2002]
+@define N=2002
+isVisible:if memory.unique[2002] and not memory.unique[2003]
+image:ROOT:全局/白菜虫/黄金时间b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2003]
+isVisible:if memory.unique[2003]
+@define N=2003
+image:ROOT:全局/白菜虫/时序崩坏b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2004]
+@define N=2004
+isVisible:if memory.unique[2004] and not memory.unique[2005]
+image:ROOT:全局/白菜虫/未来时间b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2005]
+isVisible:if memory.unique[2005]
+@define N=2005
+image:ROOT:全局/白菜虫/时未透支b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2006]
+@define N=2006
+isVisible:if memory.unique[2006] and not memory.unique[2007]
+image:ROOT:全局/白菜虫/扭曲时间b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2007]
+isVisible:if memory.unique[2007]
+@define N=2007
+image:ROOT:全局/白菜虫/时末领域b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2008]
+@define N=2008
+isVisible:if memory.unique[2008] and not memory.unique[2009]
+image:ROOT:全局/白菜虫/回溯时间b.png
+@copyFromSection:decal_技能11
+
+[decal_技能2009]
+isVisible:if memory.unique[2009]
+@define N=2009
+image:ROOT:全局/白菜虫/时溯无限b.png
+@copyFromSection:decal_技能11
+
+[action_技能2001获取]
+pos:1000.5
+isVisible:if not memory.unique[2001] and self.tags(includes='技能展开')
+iconImage:ROOT:全局/白菜虫/时间赠礼.png
+text:时间赠礼获取
+description:消耗时间获取时间赠礼技能\n提高5%速度和5%攻速\n1.5倍率自愈速度
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:false
+allowMultipleInQueue:false
+buildSpeed:5s
+price:TIME=3
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:速度乘=memory.速度乘+0.05,攻速加=memory.攻速加+0.05,回血乘=memory.回血乘+0.5,回盾乘=memory.回盾乘+0.5,unique[2001]=true
+
+[action_技能2001显示1]
+pos:1000.51
+isVisible:if memory.unique[2001] and self.tags(includes='技能展开') and not memory.unique[2002]
+iconImage:ROOT:全局/白菜虫/时间赠礼.png
+text:时间赠礼
+description:消耗时间获取黄金时间技能\n提高10%速度和10%攻速\n2.0倍自愈速度\n免疫debuff
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:3s
+price:TIME=5
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:速度乘=memory.速度乘+0.1,攻速加=memory.攻速加+0.1,回血乘=memory.回血乘+0.5,回盾乘=memory.回盾乘+0.5,unique[2002]=true
+temporarilyAddTags:免疫debuff
+[action_技能2001显示2]
+pos:1000.52
+isVisible:if memory.unique[2001] and self.tags(includes='技能展开') and not memory.unique[2004]
+iconImage:ROOT:全局/白菜虫/时间赠礼.png
+text:时间赠礼
+description:消耗时间获取未来时间技能\n提高10%攻击伤害和10%攻击范围
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:3s
+price:TIME=5
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:伤害乘=memory.伤害乘+0.1,范围乘=memory.范围乘+0.1,unique[2004]=true
+[action_技能2001显示3]
+pos:1000.53
+isVisible:if memory.unique[2001] and self.tags(includes='技能展开') and not memory.unique[2006]
+iconImage:ROOT:全局/白菜虫/时间赠礼.png
+text:时间赠礼
+description:消耗时间获取扭曲时间技能\n降低180范围内敌军15%攻击伤害,50%移动速度，20%攻击速度,和50%自愈速度
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:3s
+price:TIME=5
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:unique[2006]=true
+temporarilyAddTags:扭曲时间
+[action_技能2001显示4]
+pos:1000.54
+isVisible:if memory.unique[2001] and self.tags(includes='技能展开') and not memory.unique[2008]
+iconImage:ROOT:全局/白菜虫/时间赠礼.png
+text:时间赠礼
+description:消耗时间获取回溯时间技能\n当生命值低于20%时回满全部状态(一次性)
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:3s
+price:TIME=3
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:unique[2008]=true
+temporarilyAddTags:回溯时间
+
+[action_技能2002显示]
+pos:1000.51
+isVisible:if memory.unique[2002] and self.tags(includes='技能展开') and not memory.unique[2003]
+iconImage:ROOT:全局/白菜虫/黄金时间.png
+text:黄金时间
+description:消耗时间获取时序崩坏技能\n提高25%速度50%攻速\n无敌但每秒消耗0.3时间\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:0s
+price:TIME=1
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:速度乘=memory.速度乘+0.25,攻速加=memory.攻速加+0.5,unique[2003]=true
+#setUnitStats:energyRegen=${core.energyRegen}*2
+setUnitStats:armour=100
+temporarilyAddTags:免疫debuff
+[action_技能2003显示]
+autoTrigger:if memory.unique[2003]
+pos:1000.51
+isVisible:if memory.unique[2003] and self.tags(includes='技能展开')
+iconImage:ROOT:全局/白菜虫/时序崩坏.png
+text:时序崩坏
+isLocked:true
+isLockedMessage:提高50%速度100%攻速\n无敌但每秒消耗0.3时间\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+addResourcesWithLogic:TIME=-0.6
+
+[action_技能2004显示]
+pos:1000.52
+isVisible:if memory.unique[2004] and self.tags(includes='技能展开') and not memory.unique[2005]
+iconImage:ROOT:全局/白菜虫/未来时间.png
+text:未来时间
+description:消耗时间获取时未透支技能\n提高25%攻击伤害和25%攻击范围\n无敌但每秒消耗0.3时间\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:0s
+price:TIME=1
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:伤害乘=memory.伤害乘+0.25,范围乘=memory.范围乘+0.25,unique[2005]=true
+#setUnitStats:energyRegen=${core.energyRegen}*2
+setUnitStats:armour=1000000
+temporarilyAddTags:免疫debuff
+[action_技能2005显示]
+autoTrigger:if memory.unique[2005]
+pos:1000.52
+isVisible:if memory.unique[2005] and self.tags(includes='技能展开')
+iconImage:ROOT:全局/白菜虫/时未透支.png
+text:时未透支
+isLocked:true
+description:消耗时间获取时未透支技能\n提高25%攻击伤害和25%攻击范围\n无敌但每秒消耗0.3时间\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+addResourcesWithLogic:TIME=-0.6
+
+[action_技能2006显示]
+pos:1000.53
+isVisible:if memory.unique[2006] and self.tags(includes='技能展开') and not memory.unique[2007]
+iconImage:ROOT:全局/白菜虫/扭曲时间.png
+text:时末领域
+description:消耗时间获取时末领域技能\n降低240范围内敌军40%攻击伤害,100%移动速度，50%攻击速度和100%自愈速度\n无敌但每秒消耗0.3时间\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:0s
+price:TIME=1
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:unique[2007]=true
+#setUnitStats:energyRegen=${core.energyRegen}*2
+temporarilyAddTags:免疫debuff,时末领域
+setUnitStats:armour=1000000
+[action_技能2007显示]
+autoTrigger:if memory.unique[2007]
+pos:1000.53
+isVisible:if memory.unique[2007] and self.tags(includes='技能展开')
+iconImage:ROOT:全局/白菜虫/时末领域.png
+text:时末领域
+isLocked:true
+description:消耗时间获取时末领域技能\n降低240范围内敌军40%攻击伤害,100%移动速度，50%攻击速度和100%自愈速度\n无敌但每秒消耗0.3时间\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+addResourcesWithLogic:TIME=-0.6
+
+[action_技能2008显示]
+pos:1000.54
+isVisible:if memory.unique[2008] and self.tags(includes='技能展开') and not memory.unique[2009]
+iconImage:ROOT:全局/白菜虫/回溯时间.png
+text:回溯时间
+description:消耗时间获取时溯无限技能\n当生命值低于20%时回满全部状态(每次3时间)\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+buildSpeed:0s
+price:TIME=1
+addResourcesWithLogic:TIME=-${core.price*0.0001}
+setUnitMemory:unique[2009]=true
+#setUnitStats:energyRegen=${core.energyRegen}*2
+temporarilyAddTags:时溯无限
+
+[action_技能2009显示]
+autoTrigger:if memory.unique[2009]
+pos:1000.54
+isVisible:if memory.unique[2009] and self.tags(includes='技能展开')
+iconImage:ROOT:全局/白菜虫/时溯无限.png
+text:时溯无限
+isLocked:true
+description:消耗时间获取时溯无限技能\n当生命值低于20%时回满全部状态(每次3时间)\n时间耗尽时死亡
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+allowMultipleInQueue:false
+addResourcesWithLogic:TIME=-0.1
+
+[hiddenAction_技能2003终局]
+autoTrigger:if memory.unique[2003] and self.resource.TIME<=0.1
+deleteSelf:true
+
+[hiddenAction_技能2005终局]
+autoTrigger:if memory.unique[2005] and self.resource.TIME<=0.1
+deleteSelf:true
+
+[hiddenAction_技能2007终局]
+autoTrigger:if memory.unique[2007] and self.resource.TIME<=0.1
+deleteSelf:true
+
+[hiddenAction_技能2009终局]
+autoTrigger:if memory.unique[2009] and self.resource.TIME<=0.1
+deleteSelf:true
+
+[action_技能2010获取]
+pos:1000.55
+isVisible:if self.resource.TIME>=666
+iconImage:ROOT:全局/白菜虫/召唤白菜.png
+text:召唤白菜
+description:666这个入是桂
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:false
+allowMultipleInQueue:false
+buildSpeed:0s
+price:TIME=666
+setUnitMemory:血量乘=memory.血量乘+666,护盾乘=memory.护盾乘+666,伤害乘=memory.伤害乘+666,速度乘=memory.速度乘+6,攻速加=memory.攻速加+6,回血乘=memory.回血乘+666,回盾乘=memory.回盾乘+666,unique[2001]=true
+temporarilyAddTags:免疫debuff
+setUnitStats:armour=1000000
+#彩蛋
+
+[hiddenAction_免疫debuff]
+autoTrigger:if self.tags(includes="免疫debuff")
+setResourcesWithLogic:侵蚀碎片=0
+
+#白菜时间技能
+
+[hiddenAction_扭曲时间]
+autoTrigger:if numberOfUnitsInEnemyTeam(withTag="扭曲时间",withinRange=180,greaterThan=0) and not self.tags(includes="被扭曲1")
+temporarilyAddTags:被扭曲1
+setUnitMemory:伤害乘=memory.伤害乘-0.15,速度乘=memory.速度乘-0.5,攻速加=memory.攻速加-0.2,回血乘=memory.回血乘-0.5,回盾乘=memory.回盾乘-0.5
+
+[hiddenAction_解除扭曲时间]
+autoTrigger:if not numberOfUnitsInEnemyTeam(withTag="扭曲时间",withinRange=180,greaterThan=0) and self.tags(includes="被扭曲1")
+temporarilyRemoveTags:被扭曲1
+setUnitMemory:伤害乘=memory.伤害乘+0.15,速度乘=memory.速度乘+0.5,攻速加=memory.攻速加+0.2,回血乘=memory.回血乘+0.5,回盾乘=memory.回盾乘+0.5
+
+[hiddenAction_时末领域]
+autoTrigger:if numberOfUnitsInEnemyTeam(withTag="时末领域",withinRange=240,greaterThan=0) and not self.tags(includes="被扭曲2")
+temporarilyAddTags:被扭曲2
+setUnitMemory:伤害乘=memory.伤害乘-0.4,速度乘=memory.速度乘-1,攻速加=memory.攻速加-0.5,回血乘=memory.回血乘-1,回盾乘=memory.回盾乘-1
+
+[hiddenAction_解除时末领域]
+autoTrigger:if not numberOfUnitsInEnemyTeam(withTag="时末领域",withinRange=240,greaterThan=0) and self.tags(includes="被扭曲2")
+temporarilyRemoveTags:被扭曲2
+setUnitMemory:伤害乘=memory.伤害乘+0.4,速度乘=memory.速度乘+1,攻速加=memory.攻速加+0.5,回血乘=memory.回血乘+1,回盾乘=memory.回盾乘+1

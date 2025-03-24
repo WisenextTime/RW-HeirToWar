@@ -1,0 +1,154 @@
+#行天教临时buff使用unique的9001到10000且无技能组
+
+[resource_9001]
+hidden:true
+
+[action_9001获取]
+pos:9001
+isVisible:if self.resource.9001>0
+iconImage:ROOT:全局/玄霜.png
+text:玄霜缠身
+description:因为被玄霜缠身而减速20%\n剩余时间%{self.resource.9001}s(最多10s)
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+isActive:false
+setUnitMemory:速度乘=memory.速度乘-0.2,unique[9001]=true
+autoTrigger:if not memory.unique[9001] and self.resource.9001>0
+
+[hiddenAction_9001减少]
+autoTrigger:if self.resource.9001>0
+addResources:9001=-1
+
+[hiddenAction_9001取消]
+autoTrigger:IF self.resource.9001<=0 and memory.unique[9001]
+setUnitMemory:速度乘=memory.速度乘+0.2,unique[9001]=false
+
+[hiddenAction_9001上限]
+autoTrigger:if self.resource.9001>10
+setResourcesWithLogic:9001=10
+
+[resource_9002]
+hidden:true
+
+[action_9002获取]
+pos:9002
+isVisible:if self.resource.9002>0
+iconImage:ROOT:全局/炎阳.png
+text:炎阳烧灼
+description:因为被炎阳烧灼持续扣除生命值\n剩余%{self.resource.9002}s(最多20s)\n伤害为%{self.resource.9002}
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+isActive:false
+setUnitMemory:unique[9002]=true
+autoTrigger:if not memory.unique[9002] and self.resource.9002>0
+
+[hiddenAction_9002减少]
+autoTrigger:if self.resource.9002>0
+addResourcesWithLogic:9002=-1,hp=0-self.resource.9002
+
+[hiddenAction_9002取消]
+autoTrigger:IF self.resource.9002<=0 and memory.unique[9002]
+setUnitMemory:unique[9002]=false
+
+[hiddenAction_9002上限]
+autoTrigger:if self.resource.9002>20
+setResourcesWithLogic:9002=20
+
+[hiddenAction_反应-融化]
+autoTrigger:if self.resource.9001>0 and self.resource.9002>0
+setResourcesWithLogic:9001=0,9002=0
+addResourcesWithLogic:hp=-0.03*self.maxHp
+
+[resource_9003]
+hidden:true
+
+[action_9003获取]
+pos:9001
+isVisible:if self.resource.9003>0
+iconImage:ROOT:全局/行天buff/03-行天视域.png
+text:玄霜缠身
+description:暂时获得较大的视野\n剩余时间%{self.resource.9003}s
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+isActive:false
+setUnitMemory:unique[9003]=true
+autoTrigger:if not memory.unique[9003] and self.resource.9003>0
+
+[hiddenAction_9003减少]
+autoTrigger:if self.resource.9003>0
+addResources:9003=-1
+spawnUnits:行天视域
+
+[hiddenAction_9003取消]
+autoTrigger:IF self.resource.9003<=0 and memory.unique[9003]
+setUnitMemory:unique[9003]=false
+
+[resource_9004]
+hidden:true
+
+[action_9004获取]
+pos:9004
+isVisible:if self.resource.9004>0
+iconImage:ROOT:全局/行天buff/04-生命衰退.png
+text:生命衰退
+description:生命因某种原因减少50%\n剩余时间%{self.resource.9004}s
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+isActive:false
+setUnitMemory:unique[9004]=true,血量乘=memory.血量乘-0.5
+autoTrigger:if not memory.unique[9004] and self.resource.9004>0
+
+[hiddenAction_9004减少]
+autoTrigger:if self.resource.9004>0
+addResources:9004=-1
+
+[hiddenAction_9004取消]
+autoTrigger:IF self.resource.9004<=0 and memory.unique[9004]
+setUnitMemory:unique[9004]=false,血量乘=memory.血量乘+0.5
+
+[resource_9005]
+hidden:true
+
+[action_9005获取]
+pos:9005
+isVisible:if self.resource.9005>0
+iconImage:ROOT:全局/行天buff/05-生命再生.png
+text:生命再生
+description:生命恢复效果大幅度增强\n剩余时间%{self.resource.9005}s
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+isActive:false
+setUnitMemory:unique[9005]=true
+autoTrigger:if not memory.unique[9005] and self.resource.9005>0
+
+[hiddenAction_9005减少]
+autoTrigger:if self.resource.9005>0
+addResources:9005=-1
+addResourcesWithLogic:hp=0.05*${core.maxHp}
+
+[hiddenAction_9005取消]
+autoTrigger:IF self.resource.9005<=0 and memory.unique[9005]
+setUnitMemory:unique[9005]=false
+
+[resource_9006]
+hidden:true
+
+[action_9006获取]
+pos:9006
+isVisible:if self.resource.9006>0
+iconImage:ROOT:全局/行天buff/06-护盾失效.png
+text:护盾崩溃
+description:护盾减少100%\n剩余时间%{self.resource.9006}s
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+isActive:false
+setUnitMemory:unique[9006]=true,护盾乘=memory.护盾乘-1
+autoTrigger:if not memory.unique[9006] and self.resource.9006>0
+
+[hiddenAction_9006减少]
+autoTrigger:if self.resource.9006>0
+addResources:9006=-1
+
+[hiddenAction_9006取消]
+autoTrigger:IF self.resource.9006<=0 and memory.unique[9006]
+setUnitMemory:unique[9006]=false,护盾乘=memory.护盾乘+1

@@ -1,0 +1,35 @@
+[core]
+copyFrom:ROOT:北九星联盟/all-units.template
+
+[hiddenAction_全局创建触发]
+autoTriggerOnEvent:created
+setUnitMemory:price=100
+[hiddenAction_转换修改]
+autoTrigger:if self.lastConverted(withInSeconds=2)
+setUnitMemory:price=100
+
+[action_北盟回收单位]
+isVisible:false
+pos:999.1
+text:回收单位
+buildSpeed:${core.maxHp*0.022}s
+description:回收单位获得75%资金
+isLocked:if numberOfUnitsInTeam(withTag='回收单位', lessThan=1, withInRange=150)
+isLockedMessage:需要附近有可回收单位的建筑或单位
+addResourcesWithLogic:credits=0
+#alsoTriggerAction:陆军死亡
+deleteSelf:true
+allowMultipleInQueue:false
+[action_北盟主动修复]
+isVisible:false
+pos:999
+price:0
+text:重组修复
+buildSpeed:${core.maxHp*0.006+1}s
+description:消耗10%造价资金以恢复35%血量
+isLocked:if numberOfUnitsInTeam(withTag='回收单位', lessThan=1, withInRange=150)
+isLockedMessage:需要附近有可支持维修的建筑
+isLockedAlt2:if numberOfUnitsInTeam(withTag='组装单位', lessThan=1, withInRange=150)
+isLockedAlt2Message:需要附近有可支持维修的建筑或单位
+addResourcesWithLogic:hp=self.maxHp*0.35
+allowMultipleInQueue:false

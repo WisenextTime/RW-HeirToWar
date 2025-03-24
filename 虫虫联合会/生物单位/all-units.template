@@ -1,0 +1,46 @@
+[core]
+copyFrom:ROOT:虫虫联合会/all-units.template
+@memory 体型:float
+[hiddenAction_虫联债券]
+autoTriggerOnEvent:created
+addResourcesWithLogic:credits=${core.price}*0.2,债券=${core.price}*0.2
+[hiddenAction_虫联抚恤金]
+autoTriggerOnEvent:destroyed
+addResourcesWithLogic:credits=-min(self.resource.债券,${core.price}*0.2),债券=-min(self.resource.债券,${core.price}*0.2)
+
+[action_克隆子个体]
+pos:999
+buildSpeed:10s
+isVisible:if not memory.unique[1001]
+price:生物质=${core.price}
+iconImage:ROOT:全局/虫联/子个体.png
+text:克隆子个体
+description:克隆一个同步等级经验的子个体\n子个体比正常弱20%\n最多存在一个子个体
+produceUnits:${core.name}(addResources= setFlag:10)
+isLocked:if memory.子个体m<=memory.子个体
+isLockedMessage:子个体数量上限
+allowMultipleInQueue: false
+
+#体型标记 倍率变化
+#S 血量-0.2 伤害-0.1 攻速+0.3 (输出1.17)
+#M 血量+0.0 伤害+0.0 攻速+0.0 (输出1.00)
+#L 血量+0.2 伤害+0.1 攻速-0.2 (输出0.96)
+#X 血量+0.3 伤害+0.2 攻速-0.3 (输出0.84)
+
+[hiddenAction_体型随机]
+autoTriggerOnEvent:created
+setUnitMemory:体型=int(rnd(0,4)+self.x)%4
+#据说这玩意有可能出4，也就是M体型多了那么一丢丢(?)
+[decal_体型]
+isVisible:true
+image:ROOT:全局/虫联/尺寸标号.png
+imageScale:1.2
+alwayStartDirAtZero:true
+onlyWhileAlive:true
+frame:memory.体型
+frame_width:7
+frame_height:7
+yOffsetAbsolute:${core.radius}*1.1
+xOffsetAbsolute:${core.radius}*-1.1
+layer:beforeUI
+order:4

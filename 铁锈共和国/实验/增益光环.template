@@ -1,0 +1,59 @@
+[resource_火蜂战机光环]
+hidden:true
+[hiddenAction_火蜂战机光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='火蜂战机', greaterThan=0, withInRange=320) and not self.resource.火蜂战机光环==0
+setUnitMemory:血量乘=memory.血量乘+0.1
+setResourcesWithLogic:火蜂战机光环=1
+#showMessageToPlayer:1
+[hiddenAction_火蜂战机光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='火蜂战机', lessThan=1, withInRange=320) and not self.resource.火蜂战机光环==1
+setUnitMemory:血量乘=memory.血量乘-0.1
+setResourcesWithLogic:火蜂战机光环=0
+
+[resource_概念坦克光环]
+hidden:true
+[hiddenAction_概念坦克光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='概念坦克', greaterThan=0, withInRange=320) and not self.resource.概念坦克光环==0
+setUnitMemory:范围乘=memory.范围乘+0.1
+setResourcesWithLogic:射程光环=1
+#showMessageToPlayer:1
+[hiddenAction_概念坦克光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='概念坦克', lessThan=1, withInRange=320) and not self.resource.概念坦克光环==1
+setUnitMemory:范围乘=memory.范围乘-0.1
+setResourcesWithLogic:射程光环=0
+
+[resource_概念悬浮光环]
+hidden:true
+[hiddenAction_概念悬浮光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='概念悬浮', greaterThan=0, withInRange=320) and not self.resource.概念悬浮光环==0
+setUnitMemory:伤害乘=memory.伤害乘+0.1
+setResourcesWithLogic:概念悬浮光环=1
+#showMessageToPlayer:1
+[hiddenAction_概念悬浮光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='概念悬浮', lessThan=1, withInRange=320) and not self.resource.概念悬浮光环==1
+setUnitMemory:伤害乘=memory.伤害乘-0.1
+setResourcesWithLogic:概念悬浮光环=0
+
+[resource_飞行堡垒光环]
+hidden:true
+[hiddenAction_飞行堡垒光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='飞行堡垒', greaterThan=0, withInRange=320) and not self.resource.飞行堡垒光环==0
+setUnitMemory:回血加=memory.回血加+0.05
+setResourcesWithLogic:飞行堡垒光环=1
+#showMessageToPlayer:1
+[hiddenAction_飞行堡垒光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='飞行堡垒', lessThan=1, withInRange=320) and not self.resource.飞行堡垒光环==1
+setUnitMemory:回血加=memory.回血加-0.05
+setResourcesWithLogic:飞行堡垒光环=0
+
+[resource_飞行机甲光环]
+hidden:true
+[hiddenAction_飞行机甲光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='飞行机甲', greaterThan=0, withInRange=320) and not self.resource.飞行机甲光环==0
+setUnitMemory:速度乘=memory.速度乘+0.05
+setResourcesWithLogic:飞行机甲光环=1
+#showMessageToPlayer:1
+[hiddenAction_飞行机甲光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='飞行机甲', lessThan=1, withInRange=320) and not self.resource.飞行机甲光环==1
+setUnitMemory:速度乘=memory.速度乘-0.05
+setResourcesWithLogic:飞行机甲光环=0

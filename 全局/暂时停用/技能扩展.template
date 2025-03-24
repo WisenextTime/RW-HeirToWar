@@ -1,0 +1,49 @@
+
+[hiddenAction_+3强化]
+autoTrigger:if self.resource.level==0 and self.globalTeamTags(includes='+3强化')
+addResourcesWithLogic:level=3
+
+[hiddenAction_+3强化]
+autoTrigger:if self.resource.level==0 and self.globalTeamTags(includes='+3强化')
+addResourcesWithLogic:level=3
+
+[hiddenAction_升级1]
+autoTrigger:if self.resource.level==0 and self.resource.credits>=2000 and self.globalTeamTags(includes='升级1') and not self.tags(includes='建筑')
+addResourcesWithLogic:exp=((self.resource.level+1)*memory.price/50)*select(self.globalTeamTags(includes='学习1'),2,1)*select(self.globalTeamTags(includes='学习2'),2,1)*select(self.globalTeamTags(includes='学习3'),2,1),credits=-memory.price/500,Rexp=(memory.price/500)*select(self.globalTeamTags(includes='学习1'),2,1)*select(self.globalTeamTags(includes='学习2'),2,1)*select(self.globalTeamTags(includes='学习3'),2,1)
+[hiddenAction_升级2]
+autoTrigger:if self.resource.level==1 and self.resource.credits>=2000 and self.globalTeamTags(includes='升级2') and not self.tags(includes='建筑')
+addResourcesWithLogic:exp=((self.resource.level+1)*memory.price/50)*select(self.globalTeamTags(includes='学习1'),2,1)*select(self.globalTeamTags(includes='学习2'),2,1)*select(self.globalTeamTags(includes='学习3'),2,1),credits=-memory.price/500,Rexp=(memory.price/500)*select(self.globalTeamTags(includes='学习1'),2,1)*select(self.globalTeamTags(includes='学习2'),2,1)*select(self.globalTeamTags(includes='学习3'),2,1)
+[hiddenAction_升级3]
+autoTrigger:if self.resource.level==2 and self.resource.credits>=2000 and self.globalTeamTags(includes='升级3') and not self.tags(includes='建筑')
+addResourcesWithLogic:exp=((self.resource.level+1)*memory.price/50)*select(self.globalTeamTags(includes='学习1'),2,1)*select(self.globalTeamTags(includes='学习2'),2,1)*select(self.globalTeamTags(includes='学习3'),2,1),credits=-memory.price/500,Rexp=(memory.price/500)*select(self.globalTeamTags(includes='学习1'),2,1)*select(self.globalTeamTags(includes='学习2'),2,1)*select(self.globalTeamTags(includes='学习3'),2,1)
+
+
+[hiddenAction_命定技能1]
+autoTrigger:if self.resource.level==3 and self.resource.unique==0 and self.globalTeamTags(includes='命定3') and self.globalTeamTags(includes='护盾硬化')
+setUnitMemory:unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1
+addResources:unique=1
+@define id:42
+@define idb:4
+
+[hiddenAction_命定技能2]
+@copyFromSection:hiddenAction_命定技能1
+autoTrigger:if self.resource.level==3 and self.resource.unique==0 and self.globalTeamTags(includes='命定3') and self.globalTeamTags(includes='装甲虚化')
+@define id:62
+@define idb:6
+
+[hiddenAction_命定技能3]
+@copyFromSection:hiddenAction_命定技能1
+autoTrigger:if self.resource.level==3 and self.resource.unique==0 and self.globalTeamTags(includes='命定3') and self.globalTeamTags(includes='铁锈引擎')
+@define id:71
+@define idb:7
+
+[hiddenAction_命定技能4]
+@copyFromSection:hiddenAction_命定技能1
+autoTrigger:if self.resource.level==3 and self.resource.unique==0 and self.globalTeamTags(includes='命定3') and self.globalTeamTags(includes='额外弹仓')
+@define id:81
+@define idb:8
+
+[hiddenAction_命定技能4]
+@copyFromSection:hiddenAction_命定技能1
+autoTrigger:if self.resource.level==3 and self.resource.unique==0 and self.globalTeamTags(includes='命定3') and self.globalTeamTags(includes='赏金猎人')
+setUnitMemory:unique[102]=true,uniqueN[102]=memory.N,N=memory.N+1

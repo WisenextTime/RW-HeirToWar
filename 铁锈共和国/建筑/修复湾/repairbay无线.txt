@@ -1,0 +1,81 @@
+[core]
+name:修复湾
+class: CustomUnitMetadata
+price: 1500
+mass: 9000
+maxHp: 1000
+
+footprint: 0,0,2,2
+
+constructionFootprint:0,0,2,2
+
+buildingToFootprintOffsetX:30
+buildingToFootprintOffsetY:30
+
+techLevel: 1
+
+buildSpeed:0.001
+
+radius: 30
+buildingSelectionOffset: 0
+
+overrideAndReplace:RepairBay
+
+displayDescription:一个修复湾
+
+isBuilding: true
+
+canRepairBuildings: true
+canRepairUnits : true
+autoRepair: true
+
+nanoRepairSpeed: 0.2
+
+canReclaimResources: true
+
+nanoRange: 230
+
+[canBuild_canReclaim]
+name: reclaim
+pos:  -1
+
+[canBuild_canrepair]
+name: repair
+pos:  1
+
+[graphics]
+image:        repair_bay.png
+image_wreak:  repair_bay_dead.png
+
+image_shadow: NONE
+shadowOffsetX:1
+shadowOffsetY:1
+
+[attack]
+canAttack: false
+
+turretTurnSpeed: 6
+maxAttackRange:230
+showRangeUIGuide:true
+
+[turret_repairTurret]
+x: 0
+y: 30
+canShoot: false
+invisible: true
+
+size:0
+
+isMainNanoTurret: true
+
+[movement]
+movementType: NONE
+moveSpeed: 0
+moveAccelerationSpeed: 0.01
+moveDecelerationSpeed: 0.01
+
+maxTurnSpeed: 0
+turnAcceleration: 0.1
+
+[ai]
+#useAsBuilder: true

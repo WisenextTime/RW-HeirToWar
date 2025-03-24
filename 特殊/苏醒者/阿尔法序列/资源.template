@@ -1,0 +1,10 @@
+
+[core]
+strictLevel: 1
+logIfCreditResourceUsed: true
+
+[global_resource_腐蚀]
+displayName: 腐蚀
+displayNameShort: 腐蚀
+priority: 2
+displayColor: #CE0000

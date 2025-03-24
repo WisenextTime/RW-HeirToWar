@@ -1,0 +1,70 @@
+[core]
+copyFrom:ROOT:all-units.template,技能内容.template
+
+[action_主动回收]
+isVisible:if not self.hasFlag(id=10)
+isActive:true
+canPlayerCancel:true
+text:主动回收
+description:主动回收该单位100%的价格\n死亡则会回收72%资金和3.6%DNA\n巨虫DNA获取翻倍
+buildSpeed:${core.price*0.001+10}s
+pos:0.7
+iconImage:ROOT:全局\白菜虫\回收.png
+addResourcesWithLogic:credits=${core.price*1}
+convertTo:空气
+
+[hiddenAction_被动回收]
+requireConditional:if eventSource!=self and not self.hasFlag(id=10)
+autoTriggerOnEvent:destroyed
+addResourcesWithLogic:credits=int(${core.price*0.70}),DNA=int(${core.price*0.036})
+
+[hiddenAction_获得PP]
+requireConditional:if eventSource!=self
+autoTriggerOnEvent:destroyed
+addResourcesWithLogic:PP=${core.price*0.01}
+
+[resource_DS]
+hidden:true
+
+[resource_Timer]
+hidden:true
+
+[hiddenAction_获得白菜时间1]
+requireConditional:if eventSource!=self and not self.hasFlag(id=10)
+autoTriggerOnEvent:destroyed
+addResourcesWithLogic:TIME=${core.price*0.0001}
+
+[hiddenAction_获得白菜时间2]
+autoTriggerOnEvent:newMessage(withTag='credit')
+addResourcesWithLogic:TIME=eventData('credit',type='float')/10000
+
+[hiddenAction_获得凝聚力2]
+autoTriggerOnEvent:newMessage(withTag='credit')
+addResourcesWithLogic:PP=eventData('credit',type='float')/100
+
+[hiddenAction_回溯时间]
+autoTrigger:if self.tags(includes="回溯时间") and self.hp<${core.maxHp}*0.2
+temporarilyRemoveTags:回溯时间
+addResources:hp=1000000,shield=1000000,energy=1000000
+
+[hiddenAction_时溯无限]
+autoTrigger:if self.tags(includes="时溯无限") and self.hp<${core.maxHp}*0.2
+addResources:hp=1000000,shield=1000000,energy=1000000,TIME=-3
+
+[hiddenAction_白菜虫固有]
+addResourcesWithLogic:Rexp=-${core.price*0.25}
+
+[hiddenAction_生命抑制]
+autoTrigger:if self.hasTakenDamage(withinSeconds=1) and not self.tags(includes="生命抑制")
+temporarilyAddTags:生命抑制
+setUnitMemory:回血乘=memory.回血乘*0.5
+
+[hiddenAction_生命抑制解除]
+autoTrigger:if not self.hasTakenDamage(withinSeconds=1) and self.tags(includes="生命抑制")
+temporarilyRemoveTags:生命抑制
+setUnitMemory:回血乘=memory.回血乘*2
+#白菜的诅咒
+
+[hiddenAction_标签阵营]
+autoTriggerOnEvent:created
+temporarilyAddTags:白菜

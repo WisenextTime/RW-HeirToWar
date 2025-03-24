@@ -1,0 +1,100 @@
+#技能 200 生产单位
+#技能获取
+#虫联技能1000-1499
+[core]
+@memory 子个体:float
+@memory 子个体m:float
+
+[hiddenAction_扎根建筑]
+#autoTriggerOnEvent:created
+autoTrigger:if self.customTarget1.tags(includes='扎根建筑') and self.tags(includes='扎根建筑') and not memory.unique[1000]
+setUnitMemory:unique[1000]=true,血量乘=memory.血量乘+0.5,初始血量乘=memory.初始血量乘+0.5
+
+[decal_技能1000]
+@define N=1000
+image:ROOT:全局/虫联/扎根建筑b.png
+@copyFromSection:decal_技能11
+
+[decal_建筑根系]
+onlyWhileActive: true
+onlyWhileAlive: true
+imageScale:${core.radius/9}
+#dirOffset:${timer_2s}*360
+alpha:0.8
+#color:#505050
+layer: shadow
+isVisible:if memory.unique[1000]==true
+alwaysStartDirAtZero:true
+#@define timer_4s: ((self.timeAlive() % 4) / 4)
+
+image:ROOT:全局/虫联/建筑根系.png
+teamColors: false
+
+[decal_技能1001]
+@define N=1001
+image:ROOT:全局/虫联/子个体b.png
+@copyFromSection:decal_技能11
+
+[action_技能1000显示]
+pos:1001
+isVisible:if memory.unique[1000] and self.tags(includes='技能展开')
+autoTrigger:if (memory.unique[1000])
+iconImage:ROOT:全局/虫联/扎根建筑.png
+text:建筑扎根
+isLocked:true
+isLockedMessage:该建筑血量+50%
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+
+#子个体占用1001
+[hiddenAction_技能1001]
+autoTrigger:if self.hasFlag(id=10)
+addResourcesWithLogic:unsetFlag=10
+setUnitMemory:伤害乘=memory.伤害乘-0.2,血量乘=memory.血量乘-0.2,初始伤害乘=memory.初始伤害乘-0.2,初始血量乘=memory.初始血量乘-0.2,unique[${id}]=true,不可升级=true
+@copyFromSection:hiddenAction_技能11
+@define id:1001
+
+[action_技能1001显示]
+pos:1001
+isVisible:if memory.unique[1001] and self.tags(includes='技能展开')
+autoTrigger:if (memory.unique[1001])
+iconImage:ROOT:全局/虫联/子个体.png
+text:子个体
+isLocked:true
+isLockedMessage:降低20%血量\n降低20%伤害
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[hiddenAction_子个体同步等级]
+autoTrigger:if memory.unique[1001]
+setResourcesWithLogic:level=customTarget1.resource.level,unique=1000
+
+[hiddenAction_子个体经验上传]
+autoTrigger:if memory.unique[1001]
+sendMessageTo:customTarget1
+sendMessageWithTags:exp
+sendMessageWithData:exp=self.resource.exp,Rexp=self.resource.Rexp
+alsoTriggerAction:子个体经验上传2
+[hiddenAction_子个体经验上传2]
+setResourcesWithLogic:exp=0,Rexp=0
+
+[hiddenAction_子个体形成]
+autoTriggerOnEvent:created
+sendMessageTo:customTarget1
+sendMessageWithTags:子个体改变
+sendMessageWithData:子个体改变=1
+
+[hiddenAction_子个体死亡]
+autoTriggerOnEvent:destroyed
+sendMessageTo:customTarget1
+sendMessageWithTags:子个体改变
+sendMessageWithData:子个体改变=-1
+
+[hiddenAction_子个体容量]
+autoTriggerOnEvent:created
+setUnitMemory:子个体m=1
+
+[hiddenAction_子个体改变]
+autoTriggerOnEvent:newMessage(withTag='子个体改变')
+setUnitMemory:子个体=memory.子个体+eventData('子个体改变',type='float')

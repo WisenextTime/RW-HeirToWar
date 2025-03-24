@@ -1,0 +1,69 @@
+[resource_唤灵]
+hidden:true
+displayName:唤灵
+
+[action_唤灵术]
+text:重新召唤
+description:重新唤取灵！\n召唤物随机
+price:0
+buildSpeed:60s
+isVisible:if self.hasParent(withTag='唤灵祭坛')
+iconImage:ROOT:行天教阵营/行天教/灵.png
+whenBuilding_cannotMove:true
+allowMultipleInQueue:false
+addResourcesWithLogic:唤灵=int(rnd(1,10))
+temporarilyAddTags:转换时间到
+spawnEffects:聚灵阵,聚灵阵环
+
+[hiddenAction_战灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=1) and self.tags(includes='转换时间到')
+convertTo:战灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_魔灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=2) and self.tags(includes='转换时间到')
+convertTo:魔灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_血灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=3) and self.tags(includes='转换时间到')
+convertTo:血灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_启灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=4) and self.tags(includes='转换时间到')
+convertTo:启灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_死灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=5) and self.tags(includes='转换时间到')
+convertTo:死灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_英灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=6) and self.tags(includes='转换时间到')
+convertTo:英灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_法灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=7) and self.tags(includes='转换时间到')
+convertTo:法灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_圣灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=8) and self.tags(includes='转换时间到')
+convertTo:圣灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_巨灵]
+autoTrigger:if self.resource(type='唤灵',equalTo=9) and self.tags(includes='转换时间到')
+convertTo:巨灵
+convertTo_keepCurrentTags:true
+temporarilyRemoveTags:转换时间到
+[hiddenAction_加灵锚]
+autoTrigger:if not self.resource(type='唤灵',equalTo=0) and not self.tags(includes='已加锚')
+setUnitMemory:信仰锚=memory.信仰锚-5
+temporarilyAddTags:已加锚
+[hiddenAction_减少唤灵]
+autoTrigger:if not self.resource(type='唤灵',equalTo=0) and not self.tags(includes='转换时间到')
+addResources:唤灵=-1

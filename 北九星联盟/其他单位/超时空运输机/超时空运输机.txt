@@ -1,0 +1,48 @@
+[core]
+name:超时空运输机
+price:1600
+maxHp:800
+mass:9000
+techLevel:2
+buildSpeed:25s
+radius:25
+softCollisionOnAll:3
+maxTransportingUnits:4
+exit_x:0
+exit_y:10
+exit_dirOffset:0
+exit_moveAwayAmount:140
+transportUnitsCanUnloadUnits:if not self.isOverLiquid and not self.isMoving and self.resource.冻结==0
+displayDescription:-用于运输单位\n-不能攻击\n-远距离传送运输\n-每次进行传送将会冻结一段时间，每10格冻结1秒
+
+[resource_冻结]
+hidden:true
+
+[graphics]
+image:chrono_dropship.png
+image_wreak:dropship_dead.png
+image_shadow:AUTO
+shadowOffsetX:1
+shadowOffsetY:1
+
+[attack]
+canAttack:false
+
+[movement]
+movementType:LAND
+moveSpeed:0
+maxTurnSpeed:2.0
+
+[hiddenAction_传送]
+autoTrigger:if self.hasActiveWaypoint and self.resource.冻结==0
+addResourcesWithLogic:冻结=int(distanceBetween(self,activeWaypointTarget)/200)+1
+teleportTo:activeWaypointTarget
+
+[hiddenAction_减少冻结]
+autoTrigger:if self.resource.冻结>0
+addResources:冻结=-1
+
+[decal_冻结]
+image:SHADOW:chrono_dropship.png
+alpha:0.8
+isVisible:if self.resource.冻结>0

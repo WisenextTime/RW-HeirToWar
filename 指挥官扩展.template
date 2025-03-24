@@ -1,0 +1,14 @@
+[core]
+@memory Cl:float
+
+[hiddenAction_1]
+takeResources_searchOnly:true
+takeResources_includeUnitsWithinRange_team:own
+takeResources_includeUnitsWithinRange:10000
+takeResources_maxUnits:10000
+takeResources_triggerActionForEach:2
+setUnitMemory:Cl=0
+
+[hiddenAction_2]
+requireConditional:if thisActionTarget.readUnitMemory('CL',type='float')>memory.Cl
+setUnitMemory:Cl=thisActionTarget.readUnitMemory('CL',type='float')

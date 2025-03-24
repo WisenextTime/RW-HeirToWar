@@ -1,0 +1,77 @@
+#技能
+#0战场王牌 伞兵单位 1纳米重构 苏醒重构 2先进火控 远程狙击 3机器学习 赏金猎人 4充能组件 护盾硬化 5弹幕学说 幻影隐蔽 6额外装甲 装甲虚化 7铁锈引擎 移动要塞 8额外弹仓 蜜蜂伴飞 
+#技能获取
+#建筑
+
+蜜蜂机库 导弹防御
+#覆盖技能
+[hiddenAction_技能71]
+@define l:1000
+@define r:1000
+[hiddenAction_技能72]
+@define l:1000
+@define r:1000
+[hiddenAction_技能81]
+@define l:1000
+@define r:1000
+[hiddenAction_技能82]
+@define l:1000
+@define r:1000
+
+
+
+[hiddenAction_技能扩展]
+alsoTriggerAction:技能271,技能281
+
+[hiddenAction_技能271]
+spawnUnits:导弹防御
+setUnitMemory:unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1
+@copyFromSection:hiddenAction_技能11
+@define id:271
+@define idb:7
+@define l:60
+@define r:70
+[hiddenAction_技能281]
+spawnUnits:蜜蜂机库
+setUnitMemory:unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1
+@copyFromSection:hiddenAction_技能11
+@define id:281
+@define idb:8
+@define l:70
+@define r:80
+#技能图标
+
+[decal_技能271]
+@define N=271
+image:ROOT:全局/移动要塞b.png
+@copyFromSection:decal_技能11
+
+[decal_技能281]
+@define N=281
+image:ROOT:全局/蜜蜂伴飞b.png
+@copyFromSection:decal_技能11
+
+[action_技能271显示]
+pos:1071
+isVisible:if memory.unique[271] and self.tags(includes='技能展开')
+autoTrigger:if (memory.unique[271])
+iconImage:ROOT:全局/移动要塞.png
+text:导弹防御
+isLocked:true
+isLockedMessage:获得一个范围250 基础伤害60/3s的防御导弹\n伤害随建筑升级提高
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能281显示]
+pos:1000
+isVisible:if memory.unique[281] and self.tags(includes='技能展开')
+autoTrigger:if (memory.unique[281])
+iconImage:ROOT:全局/蜜蜂伴飞.png
+text:蜜蜂机库
+isLocked:true
+isLockedMessage:获得一个蜜蜂无人机机库\n每10s释放3台无人机对340范围内单位发起攻击
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[hiddenAction_随机]
+setUnitMemory:random=int(rnd(0,100))

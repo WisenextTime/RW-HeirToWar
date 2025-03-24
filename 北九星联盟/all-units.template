@@ -1,0 +1,17 @@
+[core]
+copyFrom:ROOT:all-units.template,ROOT:北九星联盟/北盟铁锈通用.template
+@memory 强化变量:float
+#预备役 训练度
+#工业产能
+
+#防御矩阵
+
+[hiddenAction_侵蚀抗性]
+autoTrigger:true
+takeResources:侵蚀碎片=0.5
+takeResources_includeUnitsWithinRange:50
+takeResources_includeUnitsWithinRange_team:ally
+takeResources_discardCollected:true
+takeResources_keepResourcesOnTarget:false
+takeResources_excludeUnitsWithoutAllResources:false
+takeResources_maxUnits:1978147844

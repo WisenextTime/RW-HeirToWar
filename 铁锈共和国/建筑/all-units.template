@@ -1,0 +1,9 @@
+[core]
+copyFrom:ROOT:铁锈共和国/all-units.template,技能内容.template
+tags:建筑
+
+[attack]
+maxAttackRange:0
+
+[movement]
+moveSpeed:0

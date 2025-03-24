@@ -1,0 +1,103 @@
+[core]
+copyFrom:ROOT:北九星联盟/步兵相关/all-units.template
+transportSlotsNeeded: 1
+tags:小型单位
+
+[decal_技能11]
+imageScale:0.5
+yOffsetAbsolute:-${core.radius}*0.7
+xOffsetAbsolute:-${core.radius}*0.7+memory.uniqueN[${N}]*6
+
+[decal_等级1]
+isVisible:if self.resource.level>=1
+imageScale:1
+frame_width:3
+frame_height:5
+yOffsetAbsolute:${core.radius}*1
+xOffsetAbsolute:${core.radius}*1
+
+
+[action_防御姿态]
+isVisible:if not self.tags(includes='防御姿态')
+autoTrigger:if self.hasParent() and (not self.tags(includes='防御姿态')) and (not self.hasParent(withTag='队伍行进'))
+text:防御姿态
+pos:3
+buildSpeed:1s
+setUnitMemory:范围加=memory.范围加+20,血量乘2=memory.血量乘2+1,速度乘2=memory.速度乘2-0.25
+temporarilyAddTags:防御姿态
+
+[action_解除防御]
+isVisible:if self.tags(includes='防御姿态')
+autoTrigger:if self.hasParent(withTag='队伍行进') and self.tags(includes='防御姿态')
+text:解除防御
+pos:3
+buildSpeed:1s
+setUnitMemory:范围加=memory.范围加-20,血量乘2=memory.血量乘2-1,速度乘2=memory.速度乘2+0.25
+temporarilyRemoveTags:防御姿态
+
+[decal_防御姿态]
+#@copyFromSection: decal_noAmmoIcon
+image:ROOT:全局\北盟\防御姿态.png
+imageScale: 1
+
+onlyWhileActive: true
+onlyWhileAlive: true
+onlyOnNonPreview: true
+onlyPlayersWithUnitControl: false
+onlyWithZoomLevelOrMore: 1
+alwaysStartDirAtZero: true
+layer: shadow
+isVisible: if self.tags(includes='防御姿态') and not self.hasParent()
+
+#@define timer_2s: ((self.timeAlive() % 2) / 2)
+alpha:0.8
+#0.4+cos( ${timer_2s} * 360) * 0.6
+
+teamColors: true
+
+
+[hiddenAction_正常获得经验]
+autoTriggerOnEvent:newMessage(withTag='exp')
+requireConditional:if not self.tags(includes='不知道')
+addResourcesWithLogic:exp=eventData('exp',type='float')*0.5,Rexp=eventData('Rexp',type='float')*0.5,兵员素质=eventData('Rexp',type='float')*0.5
+[action_解散单位]
+#isVisible:if 
+pos:999.1
+text:回收单位
+buildSpeed:8s
+description:回收单位获得90%资金和兵员\n步兵的经验会被回收到全局
+isLocked:false
+#isLockedMessage:需要附近有可回收单位的建筑或单位
+addResourcesWithLogic:credits=(memory.price-100)*0.9,征召兵员=1,兵员素质=self.resource.Rexp*0.5
+deleteSelf:true
+[hiddenAction_步兵建造]
+autoTriggerOnEvent:created
+addResourcesWithLogic:exp=self.resource.兵员素质*0.01,Rexp=self.resource.兵员素质*0.01,兵员素质=-self.resource.兵员素质*0.01
+
+
+
+
+[hiddenAction_步兵射程提高]
+autoTrigger:if self.hasParent(withTag="射程20") and not self.tags(includes='射程提高')
+setUnitMemory:范围加=memory.范围加+20
+temporarilyAddTags:射程提高
+#showMessageToPlayer:1
+[hiddenAction_步兵射程恢复]
+autoTrigger:if not self.hasParent(withTag="射程20") and self.tags(includes='射程提高')
+setUnitMemory:范围加=memory.范围加-20
+temporarilyRemoveTags:射程提高
+
+"""
+[hiddenAction_子个体同步等级]
+autoTriggerOnEvent:created
+setResourcesWithLogic:exp=customTarget1.resource.level*(200+${core.price}*0.5)
+
+[hiddenAction_子个体经验上传]
+autoTrigger:true
+sendMessageTo:customTarget1
+sendMessageWithTags:exp
+sendMessageWithData:exp=self.resource.Rexp*0.2,Rexp=self.resource.Rexp
+alsoTriggerAction:子个体经验上传2
+[hiddenAction_子个体经验上传2]
+setResourcesWithLogic:Rexp=0
+"""

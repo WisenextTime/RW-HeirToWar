@@ -1,0 +1,27 @@
+[hiddenAction_铁锈拾取_小]
+takeResources_includeUnitsWithinRange:30
+takeResources_includeUnitsWithinRange_team:allyNotOwn
+takeResources_excludeUnitsWithoutTags:铁锈
+takeResources_triggerActionIfAnyCollected:清理
+autoTrigger:if ${G}>0 and ${G} <500
+takeResources_maxUnits:1
+takeResources:credits=-100
+takeResources_discardCollected:true
+[hiddenAction_铁锈拾取_中]
+takeResources_includeUnitsWithinRange:30
+takeResources_includeUnitsWithinRange_team:allyNotOwn
+takeResources_excludeUnitsWithoutTags:铁锈
+takeResources_triggerActionIfAnyCollected:清理
+autoTrigger:if ${G}>100 and ${G} <1000
+takeResources_maxUnits:1
+takeResources:credits=-500
+takeResources_discardCollected:true
+[hiddenAction_铁锈拾取_大]
+takeResources_includeUnitsWithinRange:30
+takeResources_includeUnitsWithinRange_team:allyNotOwn
+takeResources_excludeUnitsWithoutTags:铁锈
+takeResources_triggerActionIfAnyCollected:清理
+autoTrigger:if ${G}>500
+takeResources_maxUnits:1
+takeResources:credits=-1000
+takeResources_discardCollected:true

@@ -1,0 +1,13 @@
+[core]
+copyFrom:ROOT:all-units.template
+
+[hiddenAction_全局创建触发]
+autoTriggerOnEvent:created
+setUnitMemory:price=100
+[hiddenAction_转换修改]
+autoTrigger:if self.lastConverted(withInSeconds=2)
+setUnitMemory:price=100
+
+[global_resource_遗迹能量]
+displayName:遗迹能量
+hidden:true

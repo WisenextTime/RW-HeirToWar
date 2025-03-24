@@ -1,0 +1,21 @@
+[core]
+copyFrom:ROOT:虫虫联合会/all-units.template
+@memory 价值变化:float
+#此数值指示百分比变化，即50代表当前价值高于正常50%
+[action_虫联主动扎根]
+pos:997
+isVisible:if not memory.unique[1000] and numberOfUnitsInTeam(withTag='扎根建筑', greaterThan=1, withInRange=320)
+iconImage:ROOT:全局/虫联/扎根建筑.png
+text:建筑扎根
+buildSpeed:${core.maxHp*0.02}s
+price:生物质=${core.price*0.1}
+#setUnitMemory:unique[1000]=true,uniqueN[1000]=memory.N,N=memory.N+1,血量乘=memory.血量乘+0.5
+alsoTriggerAction:扎根建筑
+[action_回收虫族单位]
+pos:997
+text:回收建筑
+buildSpeed:${core.maxHp*0.02}s
+description:回收建设获得资源\n获得50%价值的资金和25%价值的生物质
+addResourcesWithLogic:credits=${core.price*0.5}*(1+memory.价值变化*0.01),生物质=${core.price*0.25}*(1+memory.价值变化*0.01)
+#alsoTriggerAction:海军死亡
+deleteSelf:true

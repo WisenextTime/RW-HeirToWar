@@ -1,0 +1,10 @@
+[core]
+copyFrom:ROOT:铁锈共和国/建筑/all-units.template,工厂挂靠.template,工厂交互.template
+tags:建筑
+@memory 工厂价值:float
+@memory 额外改良:float
+[attack]
+maxAttackRange:0
+
+[movement]
+moveSpeed:0

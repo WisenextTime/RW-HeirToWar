@@ -1,0 +1,55 @@
+[core]
+copyFrom:ROOT:北九星联盟/all-units.template
+@memory 核心等级:float
+generation_resources:credits=1
+generation_delay:40
+generation_active:if memory.核心等级>=1
+
+#showActionsWithMixedSelectionIfOtherUnitsHaveTag:建筑核心
+[hiddenAction_转换修改]
+autoTrigger:false
+#核心的价值只受自定义调整，完成价值填入后就可以去掉此部分
+[action_核心等级]
+price:1500
+isVisible:if memory.核心等级==0
+text:核心等级%{int(memory.核心等级)}\n
+description:提高核心等级同时提高防护能力\n高级核心可以转换为高级建筑
+buildSpeed:32s
+isAlsoViewableByEnemies:true
+isAlsoViewableByAllies:true
+alwaysSinglePress:false
+highPriorityQueue:true
+allowMultipleInQueue:false
+canPlayerCancel:true
+setUnitMemory:核心等级=memory.核心等级+1,price=2500,血量加=memory.血量加+200,初始血量加=memory.初始血量加+200
+pos:0
+[action_核心等级1]
+@copyFromSection:action_核心等级
+isVisible:if memory.核心等级==1
+price:4500
+buildSpeed:48s
+setUnitMemory:核心等级=memory.核心等级+1,price=7000,血量加=memory.血量加+200,初始血量加=memory.初始血量加+200
+[action_核心等级2]
+@copyFromSection:action_核心等级
+isVisible:if memory.核心等级==2
+price:8500
+buildSpeed:64s
+setUnitMemory:核心等级=memory.核心等级+1,price=15500,血量加=memory.血量加+200,初始血量加=memory.初始血量加+200
+[action_核心等级3]
+@copyFromSection:action_核心等级
+isVisible:if memory.核心等级==3
+price:0
+buildSpeed:0
+setUnitMemory:核心等级=3
+
+[action_转移核心]
+text:转移核心
+buildSpeed:8s
+pos:0
+isVisible:true
+#isActive:if self.queueSize(empty=true)
+allowMultipleInQueue:false
+convertTo:悬浮核心
+highPriorityQueue:true
+forceUnloadTransportNow:true
+convertTo_keepCurrentFields:maxShield

@@ -1,0 +1,11 @@
+[core]
+copyFrom:ROOT:北九星联盟/all-units.template
+
+
+[hiddenAction_矩阵请求]
+autoTrigger:if self.shield<self.maxShield*1
+temporarilyAddTags:矩阵请求
+
+[hiddenAction_矩阵请求关]
+autoTrigger:if self.shield>=self.maxShield*1
+temporarilyRemoveTags:矩阵请求

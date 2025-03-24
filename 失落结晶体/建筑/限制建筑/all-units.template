@@ -1,0 +1,17 @@
+[core]
+copyFrom:ROOT:失落结晶体/all-units.template
+
+[placementRule_11]
+anyRuleInGroup:蚀域
+minCount:1
+searchDistance:18
+searchTags:蚀壤
+searchTeam:any
+cannotPlaceMessage:需要建造在蚀域之上
+[placementRule_12]
+anyRuleInGroup:蚀域
+minCount:1
+searchDistance:300
+searchTags:蚀碑
+searchTeam:any
+cannotPlaceMessage:需要建造在蚀域之上

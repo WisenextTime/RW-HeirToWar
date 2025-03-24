@@ -1,0 +1,35 @@
+[resource_实验蜘蛛光环]
+hidden:true
+[hiddenAction_实验蜘蛛光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='实验蜘蛛', greaterThan=0, withInRange=320) and not self.resource.实验蜘蛛光环==0
+setUnitMemory:回血乘=memory.回血乘-0.5
+setResourcesWithLogic:实验蜘蛛光环=1
+#showMessageToPlayer:1
+[hiddenAction_实验蜘蛛光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='实验蜘蛛', lessThan=1, withInRange=320) and not self.resource.实验蜘蛛光环==1
+setUnitMemory:回血乘=memory.回血乘-0.5
+setResourcesWithLogic:实验蜘蛛光环=0
+
+[resource_模块蜘蛛光环]
+hidden:true
+[hiddenAction_模块蜘蛛光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='模块蜘蛛', greaterThan=0, withInRange=320) and not self.resource.模块蜘蛛光环==0
+setUnitMemory:伤害乘=memory.伤害乘2+0.1
+setResourcesWithLogic:模块蜘蛛光环=1
+#showMessageToPlayer:1
+[hiddenAction_模块蜘蛛光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='模块蜘蛛', lessThan=1, withInRange=320) and not self.resource.模块蜘蛛光环==1
+setUnitMemory:伤害乘=memory.伤害乘-0.1
+setResourcesWithLogic:模块蜘蛛光环=0
+
+[resource_移动基地光环]
+hidden:true
+[hiddenAction_移动基地光环]
+autoTrigger:if numberOfUnitsInTeam(withTag='移动基地', greaterThan=0, withInRange=320) and not self.resource.移动基地光环==0
+setUnitMemory:速度乘=memory.速度乘-0.1
+setResourcesWithLogic:移动基地光环=1
+#showMessageToPlayer:1
+[hiddenAction_移动基地光环解除]
+autoTrigger:if numberOfUnitsInTeam(withTag='移动基地', lessThan=1, withInRange=320) and not self.resource.移动基地光环==1
+setUnitMemory:速度乘=memory.速度乘+0.1
+setResourcesWithLogic:移动基地光环=0

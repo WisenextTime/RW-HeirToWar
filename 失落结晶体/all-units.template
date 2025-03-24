@@ -1,0 +1,43 @@
+[core]
+copyFrom:ROOT:all-units.template
+
+#@memory 死灵:float
+#@memory 死灵强化:float
+updateUnitMemory:globalAdd=self.resource.死灵强化/100
+#int(self.resource.怨气)*2/1000/(1+self.resource.友方势力*0.5),死灵=int(self.resource.怨气)
+#每10000价值产生(2%/我方玩家数)增强 
+[action_死灵]
+pos:-111
+isVisible:true
+iconImage:ROOT:全局/侵染/死灵.png
+buildSpeed:1s
+text:当前强化值：%{self.resource.死灵强化}%
+description:己方与友方单位死亡产生失落值\n单位死亡产生的失落值由单位价值决定\n失落值使侵染变得更加强大！\n当前加强为%{self.resource.死灵强化}%
+allowMultipleInQueue: true
+
+[hiddenAction_死亡怨气]
+autoTriggerOnEvent:destroyed
+addResourcesWithLogic:怨气=${core.price}/2000
+
+[hiddenAction_吸收地块血量]
+autoTrigger:if self.hp != self.maxHp and not self.tags(includes="蚀壤")
+takeResources:hp=1
+takeResources_includeUnitsWithinRange:60
+takeResources_includeUnitsWithinRange_team:own
+takeResources_excludeUnitsWithoutTags:蚀壤
+takeResources_maxUnits:9
+
+[hiddenAction_标签阵营]
+autoTriggerOnEvent:created
+temporarilyAddTags:侵染
+[hiddenAction_侵蚀死亡触发]
+autoTriggerOnEvent:destroyed
+sendMessageTo:lastDamagedBy
+sendMessageWithTags:侵蚀
+sendMessageWithData:hate=int(self.maxHp/20)
+
+[hiddenAction_发送怨气]
+autoTriggerOnEvent:destroyed
+sendMessageTo:nearestUnit(withTag='灵魂晶',relation='ally')
+sendMessageWithTags:soul
+sendMessageWithData:soul=${core.price}

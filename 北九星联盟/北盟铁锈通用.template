@@ -1,0 +1,47 @@
+[core]
+@memory 强化变量:float
+
+[hiddenAction_矩阵请求]
+autoTrigger:if self.shield<self.maxShield*1
+temporarilyAddTags:矩阵请求
+requireConditional:if self.globalTeamTags(includes='北九星')
+[hiddenAction_矩阵请求关]
+autoTrigger:if self.shield>=self.maxShield*1
+temporarilyRemoveTags:矩阵请求
+requireConditional:if self.globalTeamTags(includes='北九星')
+[hiddenAction_网络强化]
+autoTrigger:true
+setUnitMemory:"""
+护盾加=memory.护盾加+(self.resource.网络强度*${core.maxHp}-memory.强化变量)*0.05,
+初始护盾加=memory.初始护盾加+(self.resource.网络强度*${core.maxHp}-memory.强化变量)*0.05,
+强化变量=self.resource.网络强度*${core.maxHp}"""
+requireConditional:if self.globalTeamTags(includes='北九星')
+
+
+[action_北盟回收单位]
+isVisible:if self.globalTeamTags(includes='北九星')
+pos:999.1
+text:回收单位
+buildSpeed:${core.maxHp*0.022}s
+description:回收单位获得75%资金
+isLocked:if numberOfUnitsInTeam(withTag='回收单位', lessThan=1, withInRange=150)
+isLockedMessage:需要附近有可回收单位的建筑或单位
+addResourcesWithLogic:credits=${core.price*0.75}
+#alsoTriggerAction:陆军死亡
+deleteSelf:true
+allowMultipleInQueue:false
+
+#主动修复
+[action_北盟主动修复]
+isVisible:if self.globalTeamTags(includes='北九星')
+pos:999
+price:${int(core.price*0.1)}
+text:重组修复
+buildSpeed:${core.maxHp*0.006+1}s
+description:消耗10%造价资金以恢复35%血量
+isLocked:if numberOfUnitsInTeam(withTag='回收单位', lessThan=1, withInRange=150)
+isLockedMessage:需要附近有可支持维修的建筑
+isLockedAlt2:if numberOfUnitsInTeam(withTag='组装单位', lessThan=1, withInRange=150)
+isLockedAlt2Message:需要附近有可支持维修的建筑或单位
+addResourcesWithLogic:hp=self.maxHp*0.35
+allowMultipleInQueue:false

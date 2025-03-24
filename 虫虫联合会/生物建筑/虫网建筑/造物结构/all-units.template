@@ -1,0 +1,33 @@
+[core]
+copyFrom:ROOT:虫虫联合会/生物建筑/all-units.template
+@memory center:unit
+
+
+[hiddenAction_绑定]
+autoTrigger:if memory.center.hp<=0
+#takeResources_searchOnly:true
+#takeResources_discardCollected:造物=1
+takeResources_includeUnitsWithinRange:400
+takeResources_includeUnitsWithinRange_team:own
+takeResources_maxUnits:1
+takeResources_triggerActionForEach:绑定2
+takeResources_excludeUnitsWithoutTags:虫网节点
+#deleteSelf:true
+[hiddenAction_绑定2]
+setUnitMemory:center=thisActionTarget
+sendMessageTo:memory.center
+sendMessageWithTags:造物改变
+sendMessageWithData:造物改变=1
+
+[hiddenAction_建筑建成]
+autoTriggerOnEvent:created
+setUnitMemory:center=customTarget1
+sendMessageTo:memory.center
+sendMessageWithTags:造物改变
+sendMessageWithData:造物改变=1
+
+[hiddenAction_建筑死亡]
+autoTriggerOnEvent:destroyed
+sendMessageTo:memory.center
+sendMessageWithTags:造物改变
+sendMessageWithData:造物改变=-1

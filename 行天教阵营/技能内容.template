@@ -1,0 +1,15 @@
+#[decal_技能4001]
+#@define N=4001
+#isVisible:if memory.unique[4001]
+#@copyFromSection:decal_技能11
+
+#[action_技能4001显示]
+#pos:4001
+#isVisible:if memory.unique[4001] and self.tags(includes='技能展开')
+#iconImage:ROOT:行天教阵营/行天教/灵鸟眷顾.png
+#text:灵鸟眷顾
+#description:附件有灵鸟的陪伴,教徒们似乎心情愉悦了一些\n增加5%的伤害
+#displayType:infoOnlyNoBox
+#isAlsoViewableByEnemies:true
+#isActive:false
+#setUnitMemory:伤害乘+=0.05

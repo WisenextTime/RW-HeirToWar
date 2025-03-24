@@ -1,0 +1,107 @@
+﻿
+[core]
+name: 太阳能电站
+displayText:太阳能发电站
+class: CustomUnitMetadata
+
+displayDescription:–[工作时能够生产10点电力]–\n–[只能在白天工作所以实际相当于产生5点]–
+
+
+generation_resources: power=10
+generation_delay: 40
+
+price: 800
+maxHp: 200
+mass: 9000
+
+maxShield: 400
+shieldRegen: 0
+startShieldAtZero:true
+
+#footprint used for collisions with units (left, up, right, down)
+footprint: -1,-1,1,1
+
+#used for placement, and placement of other buildings
+constructionFootprint: -2,-2,2,2
+
+unitsSpawnedOnDeath: 碎片*2
+
+techLevel: 1
+buildSpeed: 0.0035
+#availableInDemo: true
+
+radius: 30
+#displayRadius: 25
+isBio: false
+isBug: false
+isBuilding: true
+
+
+selfRegenRate:0.1
+selfBuildRate:0.002
+
+
+softCollisionOnAll: 3
+
+
+exit_x:0
+exit_y:-1
+
+
+tags: building
+
+[graphics]
+total_frames: 1
+showShieldBar:false
+
+
+imageScale: 1
+image:      太阳能电站.png
+#image_back: 太阳能电站.png
+image_wreak:  NONE
+
+#teamColorsUseHue: true
+
+image_shadow: AUTO
+shadowOffsetX:1
+shadowOffsetY:1
+
+
+
+
+[attack]
+canAttack: false
+canAttackFlyingUnits: true
+canAttackLandUnits:   true
+canAttackUnderwaterUnits: false
+
+turretSize: 20
+turretTurnSpeed: 3
+
+[projectile_1]
+directDamage: 80
+life:200
+speed: 4
+ballistic_height:30
+ballistic:true
+frame:1
+trailEffect:true
+[movement]
+movementType: NONE
+moveSpeed: 0
+moveAccelerationSpeed: 0.01
+moveDecelerationSpeed: 0.01
+
+maxTurnSpeed: 0
+turnAcceleration: 0.1
+
+[hiddenAction_转换]
+autoTrigger:if numberOfUnitsInNeutralTeam(withTag='夜',greaterThan=0)
+convertTo:太阳能电站夜
+
+[ai]
+buildPriority:0.85
+noneInBaseExtraPriority:0.9
+recommendedInEachBaseNum:2
+maxEachBase:3
+recommendedInEachBasePriorityIfUnmet:0.9

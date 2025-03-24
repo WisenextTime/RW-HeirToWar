@@ -1,0 +1,5 @@
+[core]
+copyFrom:ROOT:/失落结晶体/all-units.template
+[hiddenAction_地貌侵蚀]
+autoTriggerOnEvent:destroyed
+spawnUnits:蚀域*3(offsetRandomX=100,offsetRandomY=100,gridAlign=true,skipIfOverlapping=true)

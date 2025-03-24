@@ -1,0 +1,22 @@
+[core]
+copyFrom:ROOT:all-units.template
+tags:建筑
+@memory 工厂价值:float
+@memory 额外改良:float
+[attack]
+maxAttackRange:0
+
+[movement]
+moveSpeed:0
+
+[global_resource_陆军经验]
+displayName:陆军经验
+hidden:true
+
+[global_resource_海军经验]
+displayName:海军经验
+hidden:true
+
+[global_resource_空军经验]
+displayName:空军经验
+hidden:true

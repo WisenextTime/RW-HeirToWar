@@ -1,0 +1,13 @@
+[core]
+copyFrom:ROOT:异界白菜虫/all-units.template
+
+[action_升级DBCS]
+convertTo_keepCurrentTags:true
+
+[hiddenAction_庇护]
+autoTrigger:false
+convertTo_keepCurrentTags:true
+
+[hiddenAction_雾隐]
+autoTrigger:false
+convertTo_keepCurrentTags:true

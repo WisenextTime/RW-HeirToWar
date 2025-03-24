@@ -1,0 +1,656 @@
+#技能 200 生产单位
+#通用可获取技能占0—101
+#0战场王牌 伞兵单位 1纳米重构 苏醒重构 2先进火控 远程狙击 3机器学习 赏金猎人 4充能组件 护盾硬化 5弹幕学说 幻影隐蔽 6额外装甲 装甲虚化 7铁锈引擎 移动要塞 8额外弹仓 蜜蜂伴飞 9先天体虚 先天愚钝 10先天残疾 精神失常
+#技能获取
+[core]
+@memory random:float
+@memory N:float
+@memory NR:float
+@memory unique:boolean[]
+@memory uniqueb:boolean[]
+@memory uniqueN:float[]
+
+[hiddenAction_技能B]
+autoTrigger:if self.resource.level==3 and self.resource.unique==0 and not self.globalTeamTags(includes='命定3')
+alsoTriggerAction:随机
+addResources:unique=1
+
+[hiddenAction_技能]
+autoTrigger:if int(self.resource.level/5)>(self.resource.unique-1) and self.resource.level>=5
+alsoTriggerAction:随机
+addResources:unique=1
+
+[hiddenAction_随机]
+setUnitMemory:random=int(rnd(0,101))
+alsoTriggerAction:技能0,技能11,技能12,技能21,技能22,技能31,技能32,技能41,技能42,技能51,技能52,技能61,技能62,技能71,技能72,技能81,技能91,技能82,技能92,技能101,技能102,技能0防重复,技能扩展
+
+[hiddenAction_技能扩展]
+addResourcesWithLogic:hp=0
+
+[hiddenAction_技能0防重复]
+requireConditional:if memory.random==${id} and memory.unique[${id}]
+alsoTriggerAction:随机
+@define id:0
+[hiddenAction_技能0]
+setUnitMemory:血量乘=memory.血量乘+0.1,护盾乘=memory.护盾乘+0.1,伤害乘=memory.伤害乘+0.1,攻速加=memory.攻速加+0.1,速度乘=memory.速度乘+0.1,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1
+@copyFromSection:hiddenAction_技能11
+@define id:0
+@define idb:0
+@define l:100
+@define r:101
+[hiddenAction_技能1]
+#setUnitMemory:"""unique[${id}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,
+setUnitMemory:"""unique[${id}]=true,
+血量加=memory.血量加+memory.初始血量加,
+血量乘=memory.血量乘+memory.初始血量乘,
+回血乘=memory.回血乘+memory.初始回血乘,
+护盾加=memory.护盾加+memory.初始护盾加,
+护盾乘=memory.护盾乘+memory.初始护盾乘,
+回盾加=memory.回盾加+memory.初始回盾加,
+回盾乘=memory.回盾乘+memory.初始回盾乘,
+伤害乘=memory.伤害乘+memory.初始伤害乘,
+攻速加=memory.攻速加+memory.初始攻速加,
+速度加=memory.速度加+memory.初始速度加,
+速度乘=memory.速度乘+memory.初始速度乘,
+范围加=memory.范围加+memory.初始范围加,
+范围乘=memory.范围乘+memory.初始范围乘"""
+@define id:1
+[hiddenAction_技能11]
+requireConditional:if (memory.random>=${l} and memory.random<${r}) and not memory.uniqueb[${idb}]
+setUnitMemory:unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@define id:11
+@define idb:1
+@define l:0
+@define r:8
+[hiddenAction_技能12]
+setUnitMemory:血量乘=memory.血量乘+0.1,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:12
+@define idb:1
+@define l:8
+@define r:10
+[hiddenAction_技能21]
+setUnitMemory:范围乘=memory.范围乘+0.1,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:21
+@define idb:2
+@define l:10
+@define r:15
+[hiddenAction_技能22]
+setUnitMemory:范围乘=memory.范围乘+0.5,攻速加=memory.攻速加-0.5,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:22
+@define idb:2
+@define l:15
+@define r:20
+[hiddenAction_技能31]
+@copyFromSection:hiddenAction_技能11
+@define id:31
+@define idb:3
+@define l:20
+@define r:25
+[hiddenAction_技能32]
+@copyFromSection:hiddenAction_技能11
+@define id:32
+@define idb:3
+@define l:25
+@define r:30
+[hiddenAction_技能41]
+setUnitMemory:护盾加=memory.护盾加+100+memory.price*0.05,回盾加=memory.回盾加+0.05,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:41
+@define idb:4
+@define l:30
+@define r:35
+[hiddenAction_技能42]
+setUnitMemory:护盾加=memory.护盾加-${core.maxShield*0.9},血量加=memory.血量加+${core.maxShield},unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:42
+@define idb:4
+@define l:35
+@define r:40
+[hiddenAction_技能51]
+setUnitMemory:攻速加=memory.攻速加+1,伤害乘=memory.伤害乘-0.5,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:51
+@define idb:5
+@define l:40
+@define r:47
+[hiddenAction_技能52]
+@copyFromSection:hiddenAction_技能11
+@define id:52
+@define idb:5
+@define l:47
+@define r:50
+[hiddenAction_技能61]
+setUnitMemory:血量加=memory.血量加+100+memory.price*0.08,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:61
+@define idb:6
+@define l:50
+@define r:55
+[hiddenAction_技能62]
+setUnitMemory:护盾加=memory.护盾加+${core.maxHp*0.5},血量加=memory.血量加-${core.maxHp*0.5},回盾加=memory.回盾加+${core.maxHp}/12000,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:62
+@define idb:6
+@define l:55
+@define r:60
+[hiddenAction_技能71]
+setUnitMemory:速度加=memory.速度加+0.1,速度乘=memory.速度乘+0.1,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:71
+@define idb:7
+@define l:60
+@define r:68
+[hiddenAction_技能72]
+setUnitMemory:速度乘=memory.速度乘-0.5,血量乘=memory.血量乘+0.5,护盾乘=memory.护盾乘+0.5,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:72
+@define idb:7
+@define l:68
+@define r:70
+[hiddenAction_技能81]
+setUnitMemory:伤害乘=memory.伤害乘+0.1,血量乘=memory.血量乘-0.2,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:81
+@define idb:8
+@define l:70
+@define r:75
+[hiddenAction_技能82]
+@copyFromSection:hiddenAction_技能11
+@define id:82
+@define idb:8
+@define l:75
+@define r:80
+[hiddenAction_技能91]
+setUnitMemory:伤害乘=memory.伤害乘-0.3,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:91
+@define idb:9
+@define l:80
+@define r:88
+[hiddenAction_技能92]
+setUnitMemory:速度乘=memory.速度乘-0.3,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:92
+@define idb:9
+@define l:88
+@define r:90
+[hiddenAction_技能101]
+setUnitMemory:血量乘=memory.血量乘-0.3,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:101
+@define idb:10
+@define l:90
+@define r:98
+[hiddenAction_技能102]
+setUnitMemory:血量乘=memory.血量乘+0.3,护盾乘=memory.护盾乘+0.3,伤害乘=memory.伤害乘+0.3,攻速加=memory.攻速加+0.3,速度乘=memory.速度乘+0.3,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:102
+@define idb:10
+@define l:98
+@define r:100
+#单位发疯
+[hiddenAction_单位发疯]
+requireConditional:true
+autoTrigger:if self.teamID==-2 and (numberOfUnitsInNeutralTeam(withTag='敌对疯狂',greaterThan=0) or numberOfUnitsInEnemyTeam(withTag='敌对疯狂',greaterThan=0)) and not memory.uniqueb[${idb}]
+setUnitMemory:血量乘=memory.血量乘+0.3,护盾乘=memory.护盾乘+0.3,伤害乘=memory.伤害乘+0.3,攻速加=memory.攻速加+0.3,速度乘=memory.速度乘+0.3,unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1
+@copyFromSection:hiddenAction_技能11
+@define id:102
+@define idb:10
+@define l:98
+@define r:100
+#技能图标
+
+[decal_技能0]
+@define N=0
+image:ROOT:全局/战场王牌b.png
+@copyFromSection:decal_技能11
+"""
+[decal_技能1]
+@define N=1
+image:ROOT:全局/属性调整b.png
+@copyFromSection:decal_技能11
+"""
+[decal_技能200]
+@define N=200
+image:ROOT:全局/生产单位b.png
+@copyFromSection:decal_技能11
+[decal_技能2]
+@define N=2
+image:ROOT:全局/伞兵单位b.png
+@copyFromSection:decal_技能11
+
+[decal_技能11]
+@define N=11
+isVisible:if memory.unique[${N}]
+image:ROOT:全局/纳米重构b.png
+imageScale:1
+alwayStartDirAtZero:true
+onlyWhileAlive:true
+yOffsetAbsolute:-${core.radius}*1.1
+xOffsetAbsolute:-${core.radius}*1.1+memory.uniqueN[${N}]*12
+layer:afterBody
+[decal_技能12]
+@define N=12
+image:ROOT:全局/苏醒重构b.png
+@copyFromSection:decal_技能11
+[decal_技能21]
+@define N=21
+image:ROOT:全局/先进火控b.png
+@copyFromSection:decal_技能11
+[decal_技能22]
+@define N=22
+image:ROOT:全局/远程狙击b.png
+@copyFromSection:decal_技能11
+[decal_技能31]
+@define N=31
+image:ROOT:全局/机器学习b.png
+@copyFromSection:decal_技能11
+[decal_技能32]
+@define N=32
+image:ROOT:全局/赏金猎人b.png
+@copyFromSection:decal_技能11
+[decal_技能41]
+@define N=41
+image:ROOT:全局/充能组件b.png
+@copyFromSection:decal_技能11
+[decal_技能42]
+@define N=42
+image:ROOT:全局/护盾硬化b.png
+@copyFromSection:decal_技能11
+[decal_技能51]
+@define N=51
+image:ROOT:全局/弹幕学说b.png
+@copyFromSection:decal_技能11
+[decal_技能52]
+@define N=52
+image:ROOT:全局/幻影隐蔽b.png
+@copyFromSection:decal_技能11
+[decal_技能61]
+@define N=61
+image:ROOT:全局/额外装甲b.png
+@copyFromSection:decal_技能11
+[decal_技能62]
+@define N=62
+image:ROOT:全局/装甲虚化b.png
+@copyFromSection:decal_技能11
+[decal_技能71]
+@define N=71
+image:ROOT:全局/铁锈引擎b.png
+@copyFromSection:decal_技能11
+[decal_技能72]
+@define N=72
+image:ROOT:全局/移动要塞b.png
+@copyFromSection:decal_技能11
+[decal_技能81]
+@define N=81
+image:ROOT:全局/额外弹仓b.png
+@copyFromSection:decal_技能11
+[decal_技能82]
+@define N=82
+image:ROOT:全局/蜜蜂伴飞b.png
+@copyFromSection:decal_技能11
+[decal_技能91]
+@define N=91
+image:ROOT:全局/先天体虚b.png
+@copyFromSection:decal_技能11
+[decal_技能92]
+@define N=92
+image:ROOT:全局/先天愚钝b.png
+@copyFromSection:decal_技能11
+[decal_技能101]
+@define N=101
+image:ROOT:全局/先天残疾b.png
+@copyFromSection:decal_技能11
+
+[decal_技能102]
+@define N=102
+image:ROOT:全局/精神失常b.png
+@copyFromSection:decal_技能11
+#技能项目
+[action_技能展开]
+text:技能↓
+buildSpeed:0
+isVisible:if not self.tags(includes='技能展开')
+temporarilyAddTags:技能展开
+displayType:action
+alwaysSinglePress:true
+pos:1000
+highPriorityQueue:true
+[action_技能折叠]
+text:技能↑
+buildSpeed:0
+isVisible:if self.tags(includes='技能展开')
+temporarilyRemoveTags:技能展开
+displayType:action
+alwaysSinglePress:true
+isGuiBlinking:true
+highPriorityQueue:true
+pos:1000
+
+[action_技能刷新]
+text:技能刷新
+description:花费100%单位价值经验随机技能
+price:exp=0
+buildSpeed:10s
+#whenBuilding_cannotMove:true
+setUnitMemory:"""unique[11]=false,unique[12]=false,unique[21]=false,unique[22]=false,unique[31]=false,unique[32]=false,unique[41]=false,unique[42]=false,unique[51]=false,unique[52]=false,unique[61]=false,unique[62]=false,unique[71]=false,unique[72]=false,unique[81]=false,unique[82]=false,unique[91]=false,unique[92]=false,unique[101]=false,unique[102]=false,uniqueb[0]=false,uniqueb[1]=false,uniqueb[2]=false,uniqueb[3]=false,uniqueb[4]=false,uniqueb[5]=false,uniqueb[6]=false,uniqueb[7]=false,uniqueb[8]=false,uniqueb[9]=false,uniqueb[10]=false,N=memory.N-memory.NR,NR=0,
+血量加=memory.初始血量加,
+血量乘=memory.初始血量乘,
+回血加=memory.初始回血加,
+回血乘=memory.初始回血乘,
+护盾加=memory.初始护盾加,
+护盾乘=memory.初始护盾乘,
+回盾加=memory.初始回盾加,
+回盾乘=memory.初始回盾乘,
+伤害乘=memory.初始伤害乘,
+攻速加=memory.初始攻速加,
+速度加=memory.初始速度加,
+速度乘=memory.初始速度乘,
+范围加=memory.初始范围加,
+范围乘=memory.初始范围乘"""
+setResourcesWithLogic:unique=0
+isVisible:if self.tags(includes='技能展开')
+displayType:action
+alwaysSinglePress:false
+allowMultipleInQueue:false
+isGuiBlinking:true
+highPriorityQueue:true
+pos:1000
+isLocked:if self.resource.exp<memory.price
+isLockedMessage:当前经验太低至少需要%{memory.price}经验
+addResourcesWithLogic:exp=-memory.price
+[action_技能200显示]
+pos:1000
+isVisible:if memory.unique[200] and self.tags(includes='技能展开')
+autoTrigger:if (memory.unique[200])
+iconImage:ROOT:全局/生产单位.png
+text:produceUnits
+isLocked:true
+isLockedMessage:该单位生产单位时获得其价值20%经验
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能1显示]
+pos:1000
+isVisible:if memory.unique[1] and self.tags(includes='技能展开')
+autoTrigger:if (memory.unique[1])
+iconImage:ROOT:全局/属性调整.png
+text:属性调整
+isLocked:true
+isLockedMessage:这个单位因为各种原因发生属性改变
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能0显示]
+pos:1000
+isVisible:if memory.unique[0] and self.tags(includes='技能展开')
+autoTrigger:if (memory.unique[0])
+iconImage:ROOT:全局/战场王牌.png
+text:战场王牌
+isLocked:true
+isLockedMessage:血量，护盾，速度，攻击，攻速全面提升10%
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能2显示]
+pos:1001
+isVisible:if memory.unique[2] and self.tags(includes='技能展开')
+autoTrigger:if memory.unique[2]
+iconImage:ROOT:全局/伞兵单位.png
+text:伞兵单位
+isLocked:true
+isLockedMessage:每秒恢复1%原始血量\n每秒获得2%价值经验
+addResourcesWithLogic:hp=0.01*${core.maxHp},exp=memory.price*0.02
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能11显示]
+pos:1001
+isVisible:if memory.unique[11] and self.tags(includes='技能展开')
+autoTrigger:if memory.unique[11]
+iconImage:ROOT:全局/纳米重构.png
+text:纳米重构
+isLocked:true
+isLockedMessage:每秒恢复2%原始血量
+addResourcesWithLogic:hp=0.02*${core.maxHp}
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能12显示]
+pos:1001
+isVisible:if memory.unique[12] and self.tags(includes='技能展开')
+autoTrigger:if memory.unique[12]
+iconImage:ROOT:全局/苏醒重构.png
+text:苏醒重构
+isLocked:true
+isLockedMessage:借苏醒者特性每秒恢复2.5%原始血量\n提高10%hp 那么代价是什么呢……\n单位的周围会小概率随机产生苏醒者
+addResourcesWithLogic:hp=0.025*${core.maxHp}
+produceUnits:散布体死尘(spawnChance=0.01,maxSpawnLimit=1)
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能21显示]
+pos:1002
+isVisible:if (memory.unique[21]) and self.tags(includes='技能展开')
+#autoTrigger:if (memory.unique[2])
+iconImage:ROOT:全局/先进火控.png
+text:先进火控
+isLocked:true
+isLockedMessage:增加10%射程
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能22显示]
+pos:1002
+isVisible:if (memory.unique[22]) and self.tags(includes='技能展开')
+#autoTrigger:if (memory.unique[2])
+iconImage:ROOT:全局/远程狙击.png
+text:远程狙击
+isLocked:true
+isLockedMessage:增加50%射程\n降低50%攻速
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能31显示]
+pos:1003
+isVisible:if memory.unique[31] and self.tags(includes='技能展开')
+autoTrigger:if memory.unique[31]
+iconImage:ROOT:全局/机器学习.png
+text:机器学习
+isLocked:true
+isLockedMessage:每秒获得自身价值5%的经验
+addResourcesWithLogic:exp=0.05*self.priceCredits
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能32显示]
+pos:1001
+isVisible:if memory.unique[32] and self.tags(includes='技能展开')
+iconImage:ROOT:全局/赏金猎人.png
+text:赏金猎人
+isLocked:true
+isLockedMessage:击杀敌人时获得其价值5%经济
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能41显示]
+pos:1004
+isVisible:if (memory.unique[41]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/充能组件.png
+text:组件充能
+isLocked:true
+isLockedMessage:额外获得自身价格5%+100的基础护盾\n基础护盾恢复速度+0.05（3/s）
+#addResources:shield=5
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能42显示]
+pos:1004
+isVisible:if (memory.unique[42]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/护盾硬化.png
+text:护盾硬化
+isLocked:true
+isLockedMessage:将自己护盾转化为血量\n同时保留10%shield
+#addResources:shield=5
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能51显示]
+pos:1005
+isVisible:if (memory.unique[51]) and self.tags(includes='技能展开')
+autoTrigger:if memory.unique[51]
+iconImage:ROOT:全局/弹幕学说.png
+text:弹幕学说
+isLocked:true
+isLockedMessage:攻速提高100%伤害少50%\n能量恢复提高100%
+displayType:infoOnlyNoBox
+addResourcesWithLogic:energy=${core.energyRegen}*60
+isAlsoViewableByEnemies:true
+
+[action_技能52显示]
+pos:1005
+isVisible:if (memory.unique[52]) and self.tags(includes='技能展开')
+autoTrigger:if memory.unique[52]
+iconImage:ROOT:全局/幻影隐蔽.png
+text:幻影隐蔽
+isLocked:true
+isLockedMessage:单位静止时伪装自己
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[decal_幻影隐蔽友]
+onlyWhileActive:true
+onlyWhileAlive:true
+alwaysStartDirAtZero:true
+image:ROOT:全局/幻影隐蔽c.png
+isVisible:if (not self.isAttacking and not self.isMoving) and memory.unique[52]
+onlyTeam:ally
+teamColors:true
+@define timer_2s:((self.timeAlive() % 2) / 2)
+alpha:0.5+cos( ${timer_2s} * 360) * 0.3
+layer:beforeUI
+order:10
+[decal_幻影隐蔽敌]
+isVisible:if (not self.isAttacking and not self.isMoving) and memory.unique[52]
+alwaysStartDirAtZero:true
+onlyWhileActive:true
+onlyWhileAlive:true
+image:ROOT:全局/幻影隐蔽c.png
+onlyTeam:enemy
+imageScale:1
+layer:beforeUI
+order:10
+[action_技能61显示]
+pos:1006
+isVisible:if (memory.unique[61]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/额外装甲.png
+text:额外装甲
+isLocked:true
+isLockedMessage:额外获得自身价格8%+100的基础血量
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能62显示]
+pos:1006
+isVisible:if (memory.unique[62]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/装甲虚化.png
+text:装甲虚化
+isLocked:true
+isLockedMessage:50%基础血量转化为基础护盾\n增加0.5%血量的每秒基础回盾
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能71显示]
+pos:1007
+isVisible:if (memory.unique[71]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/铁锈引擎.png
+text:铁锈引擎
+isLocked:true
+isLockedMessage:单位基础速度提高0.1速度提高10%
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能72显示]
+pos:1007
+isVisible:if (memory.unique[72]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/移动要塞.png
+text:移动要塞
+isLocked:true
+isLockedMessage:单位速度降低50%\n单位血量护盾提高50%
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能81显示]
+pos:1008
+isVisible:if (memory.unique[81]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/额外弹仓.png
+text:额外弹仓
+isLocked:true
+isLockedMessage:提高10%伤害\n降低20%hp
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能82显示]
+pos:1008
+isVisible:if (memory.unique[82]) and self.tags(includes='技能展开')
+autoTrigger:if memory.unique[82]
+setUnitMemory:bee=memory.bee+1
+iconImage:ROOT:全局/蜜蜂伴飞.png
+text:蜜蜂伴飞
+isLocked:true
+isLockedMessage:嗡嗡嗡~嗡嗡嗡~\n召唤一只小蜜蜂
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+[hiddenAction_技能82召唤]
+autoTrigger:if memory.bee>=10
+setUnitMemory:bee=0
+spawnUnits:蜜蜂无人机
+
+[action_技能91显示]
+pos:1009
+isVisible:if (memory.unique[91]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/先天体虚.png
+text:虚弱之咒
+isLocked:true
+isLockedMessage:降低30%伤害
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能92显示]
+pos:1009
+isVisible:if (memory.unique[92]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/先天愚钝.png
+text:愚钝之罪
+isLocked:true
+isLockedMessage:降低30%speed
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能101显示]
+pos:1010
+isVisible:if (memory.unique[101]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/先天残疾.png
+text:残疾之苦
+isLocked:true
+isLockedMessage:降低30%hp
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_技能102显示]
+pos:1010
+isVisible:if (memory.unique[102]) and self.tags(includes='技能展开')
+iconImage:ROOT:全局/精神失常.png
+text:精神失常
+isLocked:true
+isLockedMessage:血量，护盾，速度，攻击，攻速全面提升30%\n但单位失去控制
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+clearAllWaypoints:true
+addWaypoint_type:attackMove
+addWaypoint_maxTime:0.7s
+addWaypoint_position_randomOffsetFromSelf:100,100
+autoTrigger:if (memory.unique[102])
+addWaypoint_position_offsetFromSelf:0,0

@@ -1,0 +1,54 @@
+[core]
+name:分页模板
+maxHp:1
+mass:0
+price:10
+radius:10
+disableAllUnitCollisions:true
+ignoreInUnitCapCalculation:true
+canNotBeDirectlyAttacked:true
+displayRadius:0
+autoTriggerCooldownTime_allowDangerousHighCPU:true
+autoTriggerCooldownTime:6
+numBitsOnDeath:0
+explodeOnDeath:false
+showInEditor: false
+[graphics]
+rotate_with_direction:false
+drawLayer:top
+[attack]
+canAttack:false
+
+[movement]
+movementType:NONE
+moveSpeed:0
+ignoreMoveOrders:true
+
+[decal_选择]
+image:选中.png
+isVisible:if customTarget1.resource.分页==${id}
+teamColors:true
+
+[action_选择]
+text:选择分页 ${id}
+sendMessageTo:customTarget1
+sendMessageWithTags:切换
+sendMessageWithData:id=${id}
+buildSpeed:0
+alwaysSinglePress:true
+
+[hiddenAction_删除]
+autoTrigger:if not customTarget1.tags(includes='展开')
+deleteSelf:true
+
+[resource_分页]
+displayName:分页
+
+[hiddenAction_升级]
+autoTrigger:false
+[hiddenAction_升级x9]
+autoTrigger:false
+[action_技能展开]
+isVisible:false
+[action_等级]
+isVisible:false

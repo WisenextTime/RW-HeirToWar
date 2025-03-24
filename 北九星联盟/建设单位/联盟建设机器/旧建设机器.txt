@@ -1,0 +1,374 @@
+
+[core]
+name: 联盟建设机器
+displayDescription: NONE
+#tags:敌对疯狂
+#class: CustomUnitMetadata
+price: 4000
+maxHp: 1600
+selfRegenRate:0.1
+mass: 80000
+tags:回收单位
+
+generation_resources:credits=2
+generation_delay: 40
+
+experimental: true
+
+techLevel: 2
+buildSpeed: 60s
+#availableInDemo: true
+
+numBitsOnDeath: 15
+
+transportSlotsNeeded: 8
+
+radius: 25
+displayRadius: 25
+
+isBio: false
+softCollisionOnAll: 0
+
+canRepairBuildings: true
+canRepairUnits : true
+
+
+
+canReclaimResources: true
+
+autoRepair: true
+
+nanoRange: 60
+
+nanoRepairSpeed: 0.2
+nanoBuildSpeed: 2
+
+exit_x:0
+exit_y:0
+exit_moveAwayAmount:70
+@memory 开采等级:float
+@memory 建设等级:float
+@memory 开采上限:float
+@memory 建设上限:float
+@memory 建设占用:float
+[action_开采等级]
+price:1000
+#isLocked:if self.resource.开采等级==5
+#isLockedMessage:开采等级已满级
+isVisible:if memory.开采等级==0
+text:开采等级%{int(memory.开采等级)}\n
+buildSpeed:32s
+isAlsoViewableByEnemies:true
+isAlsoViewableByAllies:true
+alwaysSinglePress:false
+highPriorityQueue:true
+allowMultipleInQueue:false
+canPlayerCancel:false
+setUnitMemory:开采等级=memory.开采等级+1
+pos:0
+[action_开采等级1]
+@copyFromSection:action_开采等级
+isVisible:if memory.开采等级==1
+price:3000
+buildSpeed:0s
+description:该次升级会减少一个临时建筑上限
+isLockedAlt:if memory.建设占用>=memory.建设上限+1 or memory.建设上限==1
+isLockedAltMessage:要求有至少一个建设上限空余
+setUnitMemory:开采等级=memory.开采等级+0.5,建设上限=memory.建设上限-1
+alsoQueueAction:开采等级1升级
+[action_开采等级1升级]
+@copyFromSection:action_开采等级1
+isVisible:if memory.开采等级==1.5
+buildSpeed:48s
+setUnitMemory:开采等级=memory.开采等级+0.5
+description:该次升级会减少一个临时建筑上限
+alsoQueueAction:NONE
+[action_开采等级2]
+@copyFromSection:action_开采等级
+isVisible:if memory.开采等级==2
+price:6000
+buildSpeed:0s
+description:该次升级会减少一个临时建筑上限
+isLockedAlt:if memory.建设占用>=memory.建设上限+1 or memory.建设上限==1
+isLockedAltMessage:要求有至少一个建设上限空余
+setUnitMemory:开采等级=memory.开采等级+0.5,建设上限=memory.建设上限-1
+alsoQueueAction:开采等级2升级
+[action_开采等级2升级]
+@copyFromSection:action_开采等级2
+isVisible:if memory.开采等级==2.5
+buildSpeed:64s
+setUnitMemory:开采等级=memory.开采等级+0.5
+description:该次升级会减少一个临时建筑上限
+alsoQueueAction:NONE
+[action_开采等级3]
+@copyFromSection:action_建设等级
+isVisible:if memory.开采等级==3
+price:0
+buildSpeed:0
+setUnitMemory:开采等级=3
+
+[action_建设等级]
+price:2000
+#isLocked:if self.resource.建设等级==5
+#isLockedMessage:建设等级已满级
+isVisible:if memory.建设等级==0
+text:建设等级%{memory.建设等级}\n
+description:建设上限%{memory.建设占用}/%{memory.建设上限+1}
+buildSpeed:32s
+isAlsoViewableByEnemies:true
+isAlsoViewableByAllies:true
+alwaysSinglePress:false
+highPriorityQueue:true
+allowMultipleInQueue:false
+canPlayerCancel:false
+setUnitMemory:建设等级=memory.建设等级+1,建设上限=memory.建设上限+1
+pos:0
+[action_建设等级1]
+@copyFromSection:action_建设等级
+isVisible:if memory.建设等级==1
+price:5000
+buildSpeed:48s
+[action_建设等级2]
+@copyFromSection:action_建设等级
+isVisible:if memory.建设等级==2
+price:5000
+buildSpeed:64s
+[action_建设等级3]
+@copyFromSection:action_建设等级
+isVisible:if memory.建设等级==3
+price:0
+buildSpeed:0
+setUnitMemory:建设等级=3
+
+[hiddenAction_生产单位]
+autoTriggerOnEvent:created
+setUnitMemory:unique[200]=true,uniqueN[200]=memory.N,N=memory.N+1
+
+[canBuild_T0]
+name:临时采集器
+pos: 1
+isLockedAlt2:if memory.建设占用>memory.建设上限
+isLockedAlt2Message:临时建筑数量已达上限
+
+[canBuild_0]
+name:防御碉堡
+pos: 1
+
+[canBuild_T1]
+name:临时工厂,临时平台,临时船坞
+pos: 1.5
+isLocked:if memory.建设等级<1
+isLockedMessage:建造需要:\n建设等级至少为1级
+isLockedAlt2:if memory.建设占用>memory.建设上限
+isLockedAlt2Message:临时建筑数量已达上限
+
+[hiddenAction_建设占用]
+autoTriggerOnEvent:newMessage(withTag='建设占用')
+setUnitMemory:建设占用=memory.建设占用+eventData('建设占用',type='float')
+
+[canBuild_T2]
+name:矩阵连接塔,矩阵发生器,机枪堡垒,防空堡垒,导弹拦截井
+pos: 2
+isLocked:if memory.建设等级<2
+isLockedMessage:建造需要:\n建设等级至少为2级
+
+[canBuild_T3]
+name:陆军总工厂,遥控指挥台,海军总基地
+pos: 3
+isLocked:if memory.建设等级<3
+isLockedMessage:建造需要:\n建设等级至少为3级
+
+
+[graphics]
+total_frames: 3
+imageScale: 0.9
+
+image:        建设机器B.png
+image_wreak: NONE
+image_turret: NONE
+
+image_shadow: AUTO
+shadowOffsetX:3
+shadowOffsetY:3
+
+
+animation_moving_start: 0
+animation_moving_end: 2
+animation_moving_speed: 4
+
+teamColorsOnTurret: true
+
+movementEffect:        CUSTOM:dustL, CUSTOM:dustR
+movementEffectReverse: CUSTOM:dustL, CUSTOM:dustR
+movementEffectReverseFlipEffects: true
+movementEffectRate: 8
+
+[attack]
+canAttack: true
+canAttackFlyingUnits: true
+canAttackLandUnits:   true
+canAttackUnderwaterUnits: false
+
+showRangeUIGuide:true
+turretSize: 0
+
+
+maxAttackRange: 200
+shootDelay: 150
+
+turretMultiTargeting: true
+
+[turret_nanoTurret]
+
+x: 0
+y: 0
+
+idleDir:0
+#idleDirReversing: 180
+
+warmup:0
+
+turnSpeed: 1
+size: 60
+
+image: 建设机械臂.png
+
+canShoot: false
+canAttackFlyingUnits: false
+canAttackLandUnits:   false
+canAttackUnderwaterUnits: false
+
+isMainNanoTurret: true
+
+[turret_antiair1]
+#antiair 1
+x: -10
+y: 0
+
+invisible:true
+
+size: 0
+
+projectile: 2
+
+canAttackFlyingUnits: true
+canAttackLandUnits:   true
+canAttackUnderwaterUnits: false
+
+turnSpeed: 2000
+turnSpeedAcceleration: 1
+
+warmup: 30
+
+shoot_sound: missile_fire
+shoot_sound_vol:0.3
+shoot_flame: NONE
+shoot_light:#FFEECCCC
+
+canShoot: true
+
+
+[effect_projectileTrail]
+
+stripIndex: effects
+frameIndex: 0
+#image: SHARED:light_50.png
+
+life: 20
+fadeOut: true
+attachedToUnit: false
+color: #ffff925c
+fadeInTime:5
+scaleFrom: 0.6
+scaleTo: 0.9
+alpha: 0.6
+drawUnderUnits:false
+#ySpeedRelative:-1
+atmospheric:true
+
+dirOffsetRandom:180
+
+xSpeedAbsoluteRandom: 0.2
+ySpeedAbsoluteRandom: 0.2
+
+ySpeedRelative:0.8
+
+
+[effect_dustL]
+
+life: 30
+stripIndex: dust
+frameIndex: 0
+frameIndexRandom: 2
+scaleFrom: 1.5
+scaleTo: 1.9
+alpha: 0.6
+atmospheric:true
+#dirOffsetRandom:180
+xSpeedAbsoluteRandom: 0.1
+ySpeedAbsoluteRandom: 0.1
+ySpeedRelative:-0.8
+hSpeed:0.1
+xOffsetRelative:20
+yOffsetRelative:-34
+drawUnderUnits:true
+attachedToUnit: false
+
+[effect_dustR]
+
+life: 30
+stripIndex: dust
+frameIndex: 0
+frameIndexRandom: 2
+scaleFrom: 1.5
+scaleTo: 1.9
+alpha: 0.6
+atmospheric:true
+#dirOffsetRandom:180
+xSpeedAbsoluteRandom: 0.1
+ySpeedAbsoluteRandom: 0.1
+ySpeedRelative:-0.8
+hSpeed:0.1
+xOffsetRelative:-20
+yOffsetRelative:-34
+drawUnderUnits:true
+attachedToUnit: false
+
+
+[projectile_2]
+#missile
+directDamage: 60
+life: 190
+speed: 2
+targetSpeed: 6
+
+color: #fff7ff1d
+
+drawSize: 1.9
+
+trailEffect: true
+largeHitEffect: true
+
+ballistic: true
+ballistic_delaymove_height:25
+ballistic_height: 25
+
+lightColor: #f7ff1d
+lightSize: 0.5
+
+[movement]
+movementType: LAND
+moveSpeed: 0.5
+moveAccelerationSpeed: 0.03
+moveDecelerationSpeed: 0.03
+
+reverseSpeedPercentage:0.2
+
+maxTurnSpeed: 0.7
+turnAcceleration: 0.04
+
+moveSlidingMode :false
+moveIgnoringBody:false
+
+[ai]
+useAsBuilder: true

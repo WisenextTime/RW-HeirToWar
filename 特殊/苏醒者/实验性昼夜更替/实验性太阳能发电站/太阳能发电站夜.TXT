@@ -1,0 +1,12 @@
+﻿
+[core]
+showInEditor:false
+copyFrom:太阳能发电站.ini
+name: 太阳能电站夜
+
+generation_resources: power=0
+generation_delay: 40
+
+[hiddenAction_转换]
+autoTrigger:if numberOfUnitsInNeutralTeam(withTag='昼',greaterThan=0)
+convertTo:太阳能电站

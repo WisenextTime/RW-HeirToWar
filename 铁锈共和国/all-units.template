@@ -1,0 +1,188 @@
+[core]
+copyFrom:ROOT:all-units.template
+#此部分需要加给单位
+"""
+updateUnitMemory:globalAdd=1+self.resource.陆军加成
+or
+updateUnitMemory:globalAdd=1+self.resource.海军加成
+or
+updateUnitMemory:globalAdd=1+self.resource.空军加成
+customTarget1.tags(includes='')
+"""
+[hiddenAction_初始修正]
+#血盾比正为血变盾负为盾变血
+autoTriggerOnEvent:created
+requireConditional:if customTarget1.readUnitMemory('单位类型',type='float')==1 and customTarget1.readUnitMemory('改良次数',type='float')>0 and not self.tags(includes='不知道')
+setUnitMemory:"""
+初始血量加=customTarget1.readUnitMemory('初始血量加',type='float'),
+初始血量乘=customTarget1.readUnitMemory('初始血量乘',type='float'),
+初始回血加=customTarget1.readUnitMemory('初始回血加',type='float'),
+初始回血乘=customTarget1.readUnitMemory('初始回血乘',type='float'),
+初始护盾加=customTarget1.readUnitMemory('初始护盾加',type='float'),
+初始护盾乘=customTarget1.readUnitMemory('初始护盾乘',type='float'),
+初始血盾比=customTarget1.readUnitMemory('初始血盾比',type='float'),
+初始回盾加=customTarget1.readUnitMemory('初始回盾加',type='float'),
+初始回盾乘=customTarget1.readUnitMemory('初始回盾乘',type='float'),
+初始伤害乘=customTarget1.readUnitMemory('初始伤害乘',type='float'),
+初始攻速加=customTarget1.readUnitMemory('初始攻速加',type='float'),
+初始速度加=customTarget1.readUnitMemory('初始速度加',type='float'),
+初始速度乘=customTarget1.readUnitMemory('初始速度乘',type='float'),
+初始范围加=customTarget1.readUnitMemory('初始范围加',type='float'),
+初始范围乘=customTarget1.readUnitMemory('初始范围乘',type='float')"""
+alsoTriggerAction:技能1
+
+[action_同步改造]
+#血盾比正为血变盾负为盾变血
+text:同步改造
+description:将修正属性与母工厂同步\n不断强化改造吧
+price:exp=${int(core.price*0.1)}
+buildSpeed:10s
+isVisible:if customTarget1.readUnitMemory('单位类型',type='float')==1 and customTarget1.readUnitMemory('改良次数',type='float')>0 and not self.tags(includes='不知道')
+requireConditional:if customTarget1.readUnitMemory('单位类型',type='float')==1 and customTarget1.readUnitMemory('改良次数',type='float')>0 and not self.tags(includes='不知道')
+setUnitMemory:"""
+初始血量加=customTarget1.readUnitMemory('初始血量加',type='float'),
+初始血量乘=customTarget1.readUnitMemory('初始血量乘',type='float'),
+初始回血加=customTarget1.readUnitMemory('初始回血加',type='float'),
+初始回血乘=customTarget1.readUnitMemory('初始回血乘',type='float'),
+初始护盾加=customTarget1.readUnitMemory('初始护盾加',type='float'),
+初始护盾乘=customTarget1.readUnitMemory('初始护盾乘',type='float'),
+初始血盾比=customTarget1.readUnitMemory('初始血盾比',type='float'),
+初始回盾加=customTarget1.readUnitMemory('初始回盾加',type='float'),
+初始回盾乘=customTarget1.readUnitMemory('初始回盾乘',type='float'),
+初始伤害乘=customTarget1.readUnitMemory('初始伤害乘',type='float'),
+初始攻速加=customTarget1.readUnitMemory('初始攻速加',type='float'),
+初始速度加=customTarget1.readUnitMemory('初始速度加',type='float'),
+初始速度乘=customTarget1.readUnitMemory('初始速度乘',type='float'),
+初始范围加=customTarget1.readUnitMemory('初始范围加',type='float'),
+初始范围乘=customTarget1.readUnitMemory('初始范围乘',type='float')"""
+alsoTriggerAction:技能1
+
+[action_领袖意志]
+pos:1000
+isVisible:if self.tags(includes='技能展开') and self.hasUnitInTeam(withTag='领袖意志',withinRange=280)
+autoTrigger:if self.hasUnitInTeam(withTag='领袖意志',withinRange=280) and self.resource.level<10
+iconImage:ROOT:铁锈共和国/领袖意志.png
+text:领袖意志
+isLocked:true
+isLockedMessage:每秒获得自身价值0.5%的经验\n单位10级以前生效
+addResourcesWithLogic:exp=0.005*self.priceCredits
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_原子意志]
+pos:1000
+isVisible:if self.tags(includes='技能展开') and self.hasUnitInTeam(withTag='原子意志',withinRange=280)
+autoTrigger:if self.hasUnitInTeam(withTag='原子意志',withinRange=280) and self.resource.level<10
+iconImage:ROOT:铁锈共和国/原子意志.png
+text:原子意志
+isLocked:true
+isLockedMessage:每秒获得自身价值0.5%的经验\n单位10级以前生效
+addResourcesWithLogic:exp=0.005*self.priceCredits
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_财富意志]
+pos:1000
+isVisible:if self.tags(includes='技能展开') and self.hasUnitInTeam(withTag='财富意志',withinRange=280)
+autoTrigger:if self.hasUnitInTeam(withTag='财富意志',withinRange=280) and self.resource.level<10
+iconImage:ROOT:铁锈共和国/财富意志.png
+text:财富意志
+isLocked:true
+isLockedMessage:每秒获得自身价值0.5%的经验\n单位10级以前生效
+addResourcesWithLogic:exp=0.005*self.priceCredits
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_实验意志]
+pos:1000
+isVisible:if self.tags(includes='技能展开') and self.hasUnitInTeam(withTag='实验意志',withinRange=280)
+autoTrigger:if self.hasUnitInTeam(withTag='实验基地',withinRange=280) and self.resource.level<10
+iconImage:ROOT:铁锈共和国/实验意志.png
+text:实验意志
+isLocked:true
+isLockedMessage:每秒获得自身价值0.5%的经验\n单位10级以前生效
+addResourcesWithLogic:exp=0.005*self.priceCredits
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[hiddenAction_军团标记]
+autoTrigger:if not self.tags(includes='${core.name}')
+temporarilyAddTags:${core.name}
+[action_军团意志1]
+pos:1000
+isVisible:if self.tags(includes='技能展开') and self.hasUnitInTeam(withTag='${core.name}',withinRange=280,greaterThan=3) and self.globalTeamTags(includes='铁锈军')
+autoTrigger:if self.hasUnitInTeam(withTag='${core.name}',withinRange=280,greaterThan=3)
+requireConditional:if self.globalTeamTags(includes='铁锈军')
+iconImage:ROOT:铁锈共和国/军团意志.png
+text:军团意志
+isLocked:true
+isLockedMessage:每秒获得自身价值0.5%的经验\n在280内有每4单位效果加倍 最高3倍\n无上限 十级后依旧生效
+addResourcesWithLogic:exp=0.005*self.priceCredits
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+[action_军团意志2]
+@copyFromSection:action_军团意志1
+isVisible:false
+autoTrigger:if self.hasUnitInTeam(withTag='${core.name}',withinRange=280,greaterThan=7)
+[action_军团意志3]
+@copyFromSection:action_军团意志1
+isVisible:false
+autoTrigger:if self.hasUnitInTeam(withTag='${core.name}',withinRange=280,greaterThan=11)
+
+[hiddenAction_侵蚀抗性]
+autoTrigger:true
+takeResources:侵蚀碎片=0.5
+takeResources_includeUnitsWithinRange:50
+takeResources_includeUnitsWithinRange_team:ally
+takeResources_discardCollected:true
+takeResources_keepResourcesOnTarget:false
+takeResources_excludeUnitsWithoutAllResources:false
+takeResources_maxUnits:1978147844
+
+
+[hiddenAction_标签阵营]
+autoTriggerOnEvent:created
+temporarilyAddTags:铁锈
+
+[decal_原子底纹]
+onlyWhileActive: true
+onlyWhileAlive: true
+imageScale:${core.radius/6}
+#dirOffset:${timer_2s}*360
+alpha:0.25+cos( ${timer_4s} * 360) * 0.25
+#color:#505050
+layer: shadow
+isVisible:if self.hasUnitInTeam(withTag='原子意志',withinRange=280)
+alwaysStartDirAtZero:true
+@define timer_4s: ((self.timeAlive() % 4) / 4)
+
+image:ROOT:全局/铁锈/原子底纹.png
+teamColors: false
+[decal_财富底纹]
+image:ROOT:全局/铁锈/财富底纹.png
+@copyFromSection:decal_原子底纹
+isVisible:if self.hasUnitInTeam(withTag='财富意志',withinRange=280)
+[decal_领袖底纹]
+image:ROOT:全局/铁锈/领袖底纹.png
+@copyFromSection:decal_原子底纹
+isVisible:if self.hasUnitInTeam(withTag='领袖意志',withinRange=280)
+[decal_实验底纹]
+image:ROOT:全局/铁锈/实验底纹.png
+@copyFromSection:decal_原子底纹
+isVisible:if self.hasUnitInTeam(withTag='实验意志',withinRange=280)
+
+#实验光环
+
+
+
+[action_精英化]
+pos:999.2
+text:精英化
+isLocked:true
+isLockedMessage:功能尚在制作中，尽请期待
+iconExtraImage:ROOT:全局/铁锈/精英化.png
+isVisible:if not self.tags(includes='精英')
+
+[resource_占用经验]
+displayName:占用经验
+hidden:true
