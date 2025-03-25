@@ -179,7 +179,7 @@ isVisible:if self.hasUnitInTeam(withTag='实验意志',withinRange=280)
 pos:999.2
 text:精英化
 isLocked:true
-isLockedMessage:功能尚在制作中，尽请期待
+isLockedMessage:该单位/建筑精英化正在研发中, 尽请期待
 iconExtraImage:ROOT:全局/铁锈/精英化.png
 isVisible:if not self.tags(includes='精英')
 
