@@ -463,3 +463,22 @@ xOffsetAbsoluteRandom:${core.radius}
 yOffsetAbsoluteRandom:${core.radius}
 ySpeedAbsolute:-1
 life:60
+
+[resource_融毁]
+hidden:true
+
+[hiddenAction_接收融毁]
+autoTriggerOnEvent:tookDamage(withTag='融毁')
+requireConditional:if self.maxShield<=0 or self.shield < self.maxShield/5
+setResourcesWithLogic:融毁=5
+temporarilyAddTags:融毁
+
+[hiddenAction_融毁解除]
+autoTrigger:if self.resource.融毁 > 0
+addResources:融毁=-1
+alsoTriggerAction:解除融毁
+
+[hiddenAction_解除融毁]
+requireConditional:if (self.maxShield>0 and self.shield > self.maxShield/5) or self.resource.融毁 <= 0
+setResourcesWithLogic:融毁=0
+temporarilyRemoveTags:融毁
