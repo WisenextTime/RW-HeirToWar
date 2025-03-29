@@ -482,3 +482,26 @@ alsoTriggerAction:解除融毁
 requireConditional:if (self.maxShield>0 and self.shield > self.maxShield/5) or self.resource.融毁 <= 0
 setResourcesWithLogic:融毁=0
 temporarilyRemoveTags:融毁
+
+#
+[action_等级调试+1]
+text:等级+1
+description:等级+1
+isVisible:if self.hasUnitInTeam(withTag='沙盒调试',withinRange=300) or numberOfUnitsInEnemyTeam(withTag='沙盒调试',withinRange=300,greaterThan=0)
+addResourcesWithLogic:exp=(self.resource.level+1)*memory.price,Rexp=(self.resource.level+1)*memory.price
+buildSpeed:0
+pos:1000.1
+[action_等级调试+3]
+text:等级+3
+description:等级+3
+isVisible:if self.hasUnitInTeam(withTag='沙盒调试',withinRange=300) or numberOfUnitsInEnemyTeam(withTag='沙盒调试',withinRange=300,greaterThan=0)
+addResourcesWithLogic:exp=(self.resource.level+2)*3*memory.price,Rexp=(self.resource.level+2)*3*memory.price
+buildSpeed:0
+pos:1000.1
+[action_等级调试+5]
+text:等级+5
+description:等级+5
+isVisible:if self.hasUnitInTeam(withTag='沙盒调试',withinRange=300) or numberOfUnitsInEnemyTeam(withTag='沙盒调试',withinRange=300,greaterThan=0)
+addResourcesWithLogic:exp=(self.resource.level+3)*5*memory.price,Rexp=(self.resource.level+3)*5*memory.price
+buildSpeed:0
+pos:1000.1
