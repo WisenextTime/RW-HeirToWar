@@ -57,7 +57,7 @@ setResourcesWithLogic:9002=20
 [hiddenAction_反应-融化]
 autoTrigger:if self.resource.9001>0 and self.resource.9002>0
 setResourcesWithLogic:9001=0,9002=0
-addResourcesWithLogic:hp=-0.03*self.maxHp
+addResourcesWithLogic:hp=-0.03*self.maxHp-100
 
 [resource_9003]
 hidden:true
