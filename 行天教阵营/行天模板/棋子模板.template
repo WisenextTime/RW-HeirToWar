@@ -1,0 +1,25 @@
+
+[animation_棋子移动]
+onActions:move
+pingPong:true
+#KeyframeTimeScale:8
+body_0.00s: {scale: 1.0}
+body_0.25s: {scale: 1.1}
+body_0.50s: {scale: 1.0}
+body_0.75s: {scale: 0.9}
+body_1.00s: {scale: 1.0}
+
+[decal_行天教光环]
+onlyWhileActive: true
+onlyWhileAlive: true
+imageScale:1.2
+#dirOffset:${timer_2s}*360
+alpha:0.7+cos( ${timer_2s} * 360) * 0.2
+color:#606060
+layer: shadow
+isVisible: true
+
+@define timer_2s: ((self.timeAlive() % 2) / 2)
+
+image:ROOT:行天教阵营/行天教/灵阵底.png
+teamColors: true
