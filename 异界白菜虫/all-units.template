@@ -1,34 +1,41 @@
 [core]
 copyFrom:ROOT:all-units.template,技能内容.template
 
+[hiddenAction_正常获得经验]
+autoTriggerOnEvent:newMessage(withTag='exp')
+requireConditional:if not self.tags(includes='不知道')
+addResourcesWithLogic:虫群记忆=eventData('exp',type='float')
+[hiddenAction_白菜虫下载经验]
+autoTrigger:if self.resource.虫群记忆>100
+requireConditional:if not self.tags(includes='不知道')
+addResourcesWithLogic:exp=self.resource.虫群记忆*0.01,Rexp=self.resource.虫群记忆*0.01,虫群记忆=-self.resource.虫群记忆*0.01
+
+
 [action_主动回收]
 isVisible:if not self.hasFlag(id=10)
 isActive:true
 canPlayerCancel:true
 text:主动回收
-description:主动回收该单位100%的价格\n死亡则会回收72%资金和3.6%DNA\n巨虫DNA获取翻倍
-buildSpeed:${core.price*0.001+10}s
+description:主动回收该单位100%的价格\n死亡则会回收80%资金20%凝聚力和2.5%DNA\n巨虫DNA获取翻倍爬虫20%额外凝聚力\n主动回收会回收所有可继承经验到全局
+buildSpeed:${core.price*0.001+5}s
 pos:0.7
 iconImage:ROOT:全局\白菜虫\回收.png
-addResourcesWithLogic:credits=${core.price*1}
+addResourcesWithLogic:
+addResourcesWithLogic:虫群记忆=self.resource.Rexp,credits=${core.price*1}
 convertTo:空气
 
 [hiddenAction_被动回收]
 requireConditional:if eventSource!=self and not self.hasFlag(id=10)
 autoTriggerOnEvent:destroyed
-addResourcesWithLogic:credits=int(${core.price*0.70}),DNA=int(${core.price*0.036})
-
-[hiddenAction_获得PP]
+addResourcesWithLogic:credits=int(${core.price*0.80})
+[hiddenAction_获得DNA]
 requireConditional:if eventSource!=self
 autoTriggerOnEvent:destroyed
-addResourcesWithLogic:PP=${core.price*0.01}
-
-[resource_DS]
-hidden:true
-
-[resource_Timer]
-hidden:true
-
+addResourcesWithLogic:DNA=int(${core.price*0.025}),虫群记忆=self.resource.Rexp
+[hiddenAction_获得PP]
+requireConditional:if eventSource!=self and not self.hasFlag(id=10)
+autoTriggerOnEvent:destroyed
+addResourcesWithLogic:PP=${core.price*0.2}
 [hiddenAction_获得白菜时间1]
 requireConditional:if eventSource!=self and not self.hasFlag(id=10)
 autoTriggerOnEvent:destroyed
@@ -37,10 +44,17 @@ addResourcesWithLogic:TIME=${core.price*0.0001}
 [hiddenAction_获得白菜时间2]
 autoTriggerOnEvent:newMessage(withTag='credit')
 addResourcesWithLogic:TIME=eventData('credit',type='float')/10000
-
 [hiddenAction_获得凝聚力2]
 autoTriggerOnEvent:newMessage(withTag='credit')
-addResourcesWithLogic:PP=eventData('credit',type='float')/100
+addResourcesWithLogic:PP=eventData('credit',type='float')*0.2
+
+[resource_DS]
+hidden:true
+
+[resource_Timer]
+hidden:true
+
+
 
 [hiddenAction_回溯时间]
 autoTrigger:if self.tags(includes="回溯时间") and self.hp<${core.maxHp}*0.2
@@ -52,17 +66,17 @@ autoTrigger:if self.tags(includes="时溯无限") and self.hp<${core.maxHp}*0.2
 addResources:hp=1000000,shield=1000000,energy=1000000,TIME=-3
 
 [hiddenAction_白菜虫固有]
-addResourcesWithLogic:Rexp=-${core.price*0.25}
+addResourcesWithLogic:Rexp=-${core.price*0.5}
 
 [hiddenAction_生命抑制]
 autoTrigger:if self.hasTakenDamage(withinSeconds=1) and not self.tags(includes="生命抑制")
 temporarilyAddTags:生命抑制
-setUnitMemory:回血乘=memory.回血乘*0.5
+setUnitMemory:回血乘2=memory.回血乘2*0.25
 
 [hiddenAction_生命抑制解除]
 autoTrigger:if not self.hasTakenDamage(withinSeconds=1) and self.tags(includes="生命抑制")
 temporarilyRemoveTags:生命抑制
-setUnitMemory:回血乘=memory.回血乘*2
+setUnitMemory:回血乘2=memory.回血乘2*4
 #白菜的诅咒
 
 [hiddenAction_标签阵营]

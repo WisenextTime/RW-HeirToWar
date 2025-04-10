@@ -3,6 +3,17 @@
 
 [core]
 
+
+[action_凝聚力单位]
+pos:999
+isVisible:if self.hasFlag(id=10)
+iconImage:ROOT:全局/白菜虫/凝聚力.png
+text:凝聚力单位
+isLocked:true
+isLockedMessage:凝聚力单位不会回收获得资金和基础凝聚力
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
 [hiddenAction_白菜虫固有]
 autoTriggerOnEvent:created
 setUnitMemory:uniqueN[2001]=1,uniqueN[2002]=1,uniqueN[2003]=1,N=1

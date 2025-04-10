@@ -1,18 +1,16 @@
 [core]
 copyFrom:ROOT:异界白菜虫/all-units.template
 
-[hiddenAction_获得PP]
+[hiddenAction_爬虫获得PP]
 requireConditional:if eventSource!=self
 autoTriggerOnEvent:destroyed
-addResourcesWithLogic:PP=${core.price*0.02}
-
+addResourcesWithLogic:PP=${core.price*0.2}
 [hiddenAction_白菜虫固有]
-addResourcesWithLogic:Rexp=-${core.price*0.5}
+addResourcesWithLogic:Rexp=-${core.price*0.7}
 
 [hiddenAction_庇护]
 autoTrigger:false
 convertTo_keepCurrentTags:true
-
 [hiddenAction_雾隐]
 autoTrigger:false
 convertTo_keepCurrentTags:true
