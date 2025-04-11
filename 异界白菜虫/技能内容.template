@@ -84,7 +84,7 @@ isAlsoViewableByEnemies:false
 allowMultipleInQueue:false
 buildSpeed:5s
 price:TIME=3
-addResourcesWithLogic:TIME=-${core.price*0.0001}
+addResourcesWithLogic:TIME=-${core.price*0.001}
 setUnitMemory:速度乘=memory.速度乘+0.05,攻速加=memory.攻速加+0.05,回血乘=memory.回血乘+0.5,回盾乘=memory.回盾乘+0.5,unique[2001]=true
 
 [action_技能2001显示1]

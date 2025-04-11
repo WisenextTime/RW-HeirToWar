@@ -142,7 +142,7 @@ setUnitMemory:moveSpeed=${movement.moveSpeed}
 [hiddenAction_攻击变化]
 setUnitStats:"""
 shootDamageMultiplier=(1+memory.globalAdd)*(1+memory.伤害乘2)*(1+memory.伤害乘)*(1+self.resource.level*0.1),
-shootDelayMultiplier=1/(1+memory.攻速加)"""
+shootDelayMultiplier=1/max(0.1,(1+memory.攻速加))"""
 
 [hiddenAction_血量提升]
 setResourcesWithLogic:hp=max(self.hp*(self.maxHp/self.resource.Mhp),self.hp),shield=max(self.shield*(self.maxShield/self.resource.Msh),self.shield)

@@ -12,7 +12,7 @@ buildSpeed:${core.maxHp*0.02}s
 description:更高效地回收利用而不是简单回收/n解散单位获得75%资金/n解散可以部分回收军种经验
 isLocked:if numberOfUnitsInTeam(withTag='回收单位', lessThan=1, withInRange=150)
 isLockedMessage:需要附近有可回收单位的建筑或单位
-addResourcesWithLogic:陆军经验=self.resource.Rexp*0.01,credits=${core.price*0.75}
+addResourcesWithLogic:陆军经验=self.resource.Rexp*0.1,credits=${core.price*0.75}
 #alsoTriggerAction:陆军死亡
 deleteSelf:true
 
@@ -22,7 +22,7 @@ addResourcesWithLogic:exp=self.resource.陆军经验*0.01,陆军经验=-self.res
 
 [hiddenAction_防御经验扩展]
 requireConditional:if self.numberOfUnitsInTeam(withTag="铁锈全局", greaterThan=0)
-addResourcesWithLogic:陆军经验=${core.price}*0.03
+addResourcesWithLogic:陆军经验=${core.price}*0.02
 [hiddenAction_进攻经验扩展]
 requireConditional:if self.numberOfUnitsInTeam(withTag="铁锈全局", greaterThan=0)
-addResourcesWithLogic:陆军经验=${core.price}*0.03
+addResourcesWithLogic:陆军经验=${core.price}*0.02
