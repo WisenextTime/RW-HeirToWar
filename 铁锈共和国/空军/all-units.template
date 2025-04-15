@@ -15,9 +15,9 @@ addResourcesWithLogic:空军经验=self.resource.Rexp*0.1,credits=${core.price*0
 #alsoTriggerAction:空军死亡
 deleteSelf:true
 
-[hiddenAction_空军建造]
-autoTriggerOnEvent:created
-addResourcesWithLogic:exp=self.resource.空军经验*0.01,空军经验=-self.resource.空军经验*0.01
+#[hiddenAction_空军建造]
+#autoTriggerOnEvent:created
+#addResourcesWithLogic:exp=self.resource.空军经验*0.01,空军经验=-self.resource.空军经验*0.01
 
 [hiddenAction_防御经验扩展]
 requireConditional:if self.numberOfUnitsInTeam(withTag="铁锈全局", greaterThan=0)

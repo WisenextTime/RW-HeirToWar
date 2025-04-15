@@ -4,7 +4,7 @@ copyFrom:ROOT:异界白菜虫/all-units.template
 [hiddenAction_获得DNA]
 requireConditional:if eventSource!=self
 autoTriggerOnEvent:destroyed
-addResourcesWithLogic:DNA=int(${core.price*0.05})
+addResourcesWithLogic:DNA=int(${core.price*0.04})
 
 [hiddenAction_进化能量1]
 autoTrigger:if self.resource.DNA>100 and self.resource.level<1
