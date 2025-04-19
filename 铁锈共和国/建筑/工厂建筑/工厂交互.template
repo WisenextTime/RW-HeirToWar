@@ -68,7 +68,7 @@ setUnitMemory:"""
 autoTriggerOnEvent:newMessage(withTag='机动要塞')
 setUnitMemory:"""
 初始范围乘=memory.初始范围乘-0.03,
-初始速度乘=memory.初始速度乘+0.03,
+初始速度加=memory.初始速度加+0.03,
 初始血量乘=memory.初始血量乘+0.03,
 初始护盾乘=memory.初始护盾乘+0.03,
 改良次数=memory.改良次数+1"""
