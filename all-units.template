@@ -273,12 +273,13 @@ addResourcesWithLogic:战争分数=memory.price*0.2
 
 #生存模式
 [global_resource_levelS]
-displayName:生存等级
+displayName:初始等级
 hidden:true
 displayRoundedDown:true
 
-[hiddenAction_生存强化]
-autoTrigger:if self.resource.level==0 and self.globalTeamTags(includes='生存模式')
+[hiddenAction_初始强化]
+autoTriggerOnEvent:created
+requireConditional:if self.resource.LevelS>0 and not memory.不可升级
 addResourcesWithLogic:level=(self.resource.levelS)
 
 #协同怨气
