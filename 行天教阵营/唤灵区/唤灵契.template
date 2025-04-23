@@ -1,3 +1,6 @@
+[core]
+soundOnDeath:ROOT:行天教阵营/音频区/灵死.ogg
+
 [resource_唤灵]
 hidden:true
 displayName:唤灵
