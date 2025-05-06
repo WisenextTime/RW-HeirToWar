@@ -1,0 +1,175 @@
+[core]
+copyFrom:ROOT:all-units.template
+@memory 科技修正:float
+
+[resource_特化点]
+hidden:false
+
+[resource_特化]
+hidden:false
+
+[action_特化显示]
+pos:1000
+text:当前加成
+price:2000
+description:每击满一千价格单位任意属性提升一点\n此处花费2000强项特化一次\n以下显示包含其他属性效果\n伤害乘=%{memory.伤害乘*100}%攻速加=%{memory.伤害乘*100}%\n血量加=%{memory.血量加}%血量乘=%{memory.血量乘*100}%\n回血加=%{memory.回血加}%回血乘=%{memory.回血乘*100}%\n护盾加=%{memory.护盾加}%护盾乘=%{memory.护盾乘*100}%\n回盾加=%{memory.回盾加}%回盾乘=%{memory.回盾乘*100}%\n速度加=%{memory.速度加}%速度乘=%{memory.速度乘*100}%\n范围加=%{memory.范围加}%范围乘=%{memory.范围乘*100}%
+addResourcesWithLogic:特化=int(rnd(1,15))
+
+[hiddenAction_特化随机]
+requireConditional:if self.resource.特化点 >= 1000
+addResources: 特化点 = -1000
+addResourcesWithLogic:特化=int(rnd(1,15))
+
+[hiddenAction_特化伤害乘]
+autoTrigger:if self.resource(type='特化',equalTo=1)
+addResources:特化=-1
+setUnitMemory:伤害乘=memory.伤害乘+0.01
+
+[hiddenAction_特化血量加]
+autoTrigger:if self.resource(type='特化',equalTo=2)
+addResources:特化=-2
+setUnitMemory:血量加=memory.血量加+10
+
+[hiddenAction_特化血量乘]
+autoTrigger:if self.resource(type='特化',equalTo=3)
+addResources:特化=-3
+setUnitMemory:血量乘=memory.血量乘+0.01
+
+[hiddenAction_特化回血加]
+autoTrigger:if self.resource(type='特化',equalTo=4)
+addResources:特化=-4
+setUnitMemory:回血加=memory.回血加+0.01
+
+[hiddenAction_特化回血乘]
+autoTrigger:if self.resource(type='特化',equalTo=5)
+addResources:特化=-5
+setUnitMemory:回血乘=memory.回血乘+0.01
+
+[hiddenAction_特化护盾加]
+autoTrigger:if self.resource(type='特化',equalTo=6)
+addResources:特化=-6
+setUnitMemory:护盾加=memory.护盾加+10
+
+[hiddenAction_特化护盾乘]
+autoTrigger:if self.resource(type='特化',equalTo=7)
+addResources:特化=-7
+setUnitMemory:护盾乘=memory.护盾乘+0.01
+
+[hiddenAction_特化回盾加]
+autoTrigger:if self.resource(type='特化',equalTo=8)
+addResources:特化=-8
+setUnitMemory:回盾乘=memory.回盾乘+0.01
+
+[hiddenAction_特化回盾乘]
+autoTrigger:if self.resource(type='特化',equalTo=9)
+addResources:特化=-9
+setUnitMemory:回盾乘=memory.回盾乘+0.01
+
+[hiddenAction_特化速度加]
+autoTrigger:if self.resource(type='特化',equalTo=10)
+addResources:特化=-10
+setUnitMemory:速度加=memory.速度加+0.01
+
+[hiddenAction_特化速度乘]
+autoTrigger:if self.resource(type='特化',equalTo=11)
+addResources:特化=-11
+setUnitMemory:速度乘=memory.速度乘+0.01
+
+[hiddenAction_特化攻速加]
+autoTrigger:if self.resource(type='特化',equalTo=12)
+addResources:特化=-12
+setUnitMemory:攻速加=memory.攻速加+0.01
+
+[hiddenAction_特化范围加]
+autoTrigger:if self.resource(type='特化',equalTo=13)
+addResources:特化=-13
+setUnitMemory:范围加=memory.范围加+10
+
+[hiddenAction_特化范围乘]
+autoTrigger:if self.resource(type='特化',equalTo=14)
+addResources:特化=-14
+setUnitMemory:范围乘=memory.范围乘+0.01
+
+[hiddenAction_累计]
+autoTriggerOnEvent:killedAnyUnit
+alsoTriggerAction:特化随机
+requireConditional:if eventSource.priceCredits > 100
+addResourcesWithLogic: 特化点 = eventSource.priceCredits
+
+[global_resource_超频能量]
+hidden:false
+displayName:超频能量
+displayNameShort:超频能量
+displayColor:#B50000
+priority:1
+displayRoundedDown:true
+
+[global_resource_人口]
+hidden:false
+displayName:人口
+displayNameShort:人口
+displayColor:#FFFF00
+priority:1
+displayRoundedDown:true
+displayTextAppendResource:维护人口
+
+[global_resource_维护人口]
+hidden:true
+displayName:维护人口
+displayNameShort:维护人口
+displayColor:#FFFF00
+displayTextPostfix:
+displayTextPrefix:/
+#displayWhenZero:true
+#displayTextAppendResource:空军经验显示
+#displayTextAppendResourceWithGap:true
+
+[hiddenAction_标签阵营]
+autoTriggerOnEvent:created
+temporarilyAddTags:囤蛋
+
+
+[hiddenAction_人口超限惩罚]
+autoTrigger:if self.resource.人口>self.resource.维护人口
+setUnitMemory:globalAdd=(self.resource.维护人口*0.01)-(self.resource.人口*0.01)
+
+[hiddenAction_人口超限惩罚2]
+autoTrigger:if self.resource.人口<=self.resource.维护人口
+setUnitMemory:globalAdd=0
+
+[hiddenAction_奇点维护出生]
+autoTriggerOnEvent:created
+setUnitMemory:科技修正=1
+[hiddenAction_无科技修正]
+autoTrigger:if not numberOfUnitsInTeam(withTag='奇点工厂', greaterThan=0,withinRange=300) and memory.科技修正==1
+setUnitMemory:"""
+科技修正=0,
+血量乘=memory.血量乘-0.5,
+护盾乘=memory.护盾乘-0.5"""
+[hiddenAction_获得科技修正]
+autoTrigger:if numberOfUnitsInTeam(withTag='奇点工厂', greaterThan=0,withinRange=300) and memory.科技修正==0
+setUnitMemory:"""
+科技修正=1,
+血量乘=memory.血量乘+0.5,
+护盾乘=memory.护盾乘+0.5"""
+
+[action_缺少奇点工厂维护]
+pos:1000
+isVisible:if memory.科技修正==0
+iconImage:ROOT:全局/警告.png
+text:缺少奇点工厂维护
+isLocked:true
+isLockedMessage:缺少奇点工厂维护\n单位血量 护盾降低50%
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true
+
+[action_缺少人口维护]
+pos:1000
+isVisible:if self.resource.人口>self.resource.维护人口
+iconImage:ROOT:全局/警告.png
+text:缺少人口维护
+description:缺少人口维护数值降低%{memory.globalAdd*100}%
+isLocked:true
+isLockedMessage:缺少人口维护维护
+displayType:infoOnlyNoBox
+isAlsoViewableByEnemies:true

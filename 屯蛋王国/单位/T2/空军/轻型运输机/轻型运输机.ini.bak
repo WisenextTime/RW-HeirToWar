@@ -1,0 +1,47 @@
+[core]
+name: c_dropship
+class: CustomUnitMetadata
+price: 2000
+maxHp: 800
+mass: 10000
+techLevel: 1
+buildSpeed: 12s
+availableInDemo: true
+overrideAndReplace: dropship
+displayLocaleKey: dropship
+radius: 20
+tags: 可检测,空军
+isBio: false
+softCollisionOnAll: 24
+maxTransportingUnits: 5
+transportUnitsRequireMovementType: LAND, HOVER, OVER_CLIFF, OVER_CLIFF_WATER
+[graphics]
+total_frames: 1
+image: dropship.png
+image_wreak: dropship_dead.png
+image_turret: NONE
+image_shadow: AUTO
+shadowOffsetX: 0.3
+shadowOffsetY: 0.3
+[attack]
+canAttack: false
+canAttackFlyingUnits: false
+canAttackLandUnits: false
+canAttackUnderwaterUnits: false
+turretSize: 0
+turretTurnSpeed: 0
+maxAttackRange: 0
+[movement]
+movementType: AIR
+moveSpeed: 2.4
+moveAccelerationSpeed: 0.07
+moveDecelerationSpeed: 0.17
+landOnGround: onlyIdle
+maxTurnSpeed: 1.8
+turnAcceleration: 0.04
+moveSlidingMode: false
+moveIgnoringBody: false
+moveSlidingDir: 25
+slowDeathFall: true
+[ai]
+useAsTransport: true
