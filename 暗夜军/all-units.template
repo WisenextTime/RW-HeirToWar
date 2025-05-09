@@ -1,0 +1,16 @@
+[core]
+copyFrom:ROOT:all-units.template,ROOT:暗夜军/技能扩展.template
+transportSlotsNeeded:1
+
+[action_回收单位]
+#isVisible:if 
+pos:999.1
+text:自我回收
+buildSpeed:${core.maxHp*0.04}s
+description:回收单位获得75%资金\n因为随意回收所以回收缓慢
+isLocked:if self.tags(includes='不可回收')
+isLockedMessage:该单位不可自我回收
+addResourcesWithLogic:credits=${core.price*0.75}
+#alsoTriggerAction:陆军死亡
+deleteSelf:true
+

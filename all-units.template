@@ -426,44 +426,44 @@ autoTrigger:if self.hasParent(withTag='传送载体')
 temporarilyRemoveTags:允许传送
 
 #磷火相关
-# [resource_磷火]
-# hidden:true
+[resource_磷火]
+hidden:true
 
-# [hiddenAction_磷火检测]
-# autoTrigger: if self.resource.磷火 > 0
-# alsoTriggerAction:磷火修正, 磷火状态, 磷火消逝, 磷火传染
+[hiddenAction_磷火检测]
+autoTrigger: if self.resource.磷火 > 0
+alsoTriggerAction:磷火修正, 磷火状态, 磷火消逝, 磷火传染
 
-# [hiddenAction_磷火修正]
-# requireConditional:if self.resource.磷火 > 50
-# setResourcesWithLogic: 磷火 = 50
+[hiddenAction_磷火修正]
+requireConditional:if self.resource.磷火 > 50
+setResourcesWithLogic: 磷火 = 50
 
-# [action_磷火状态]
-# text:磷火烧灼
-# isLocked:true
-# isLockedMessage:%{self.resource.磷火}
-# isVisible:if self.resource.磷火 > 0
-# requireConditional:if self.hp < self.maxHp*0.9
-# addResourcesWithLogic:hp = - self.resource.磷火
-# spawnEffects:磷火*10
+[action_磷火状态]
+text:磷火烧灼
+isLocked:true
+isLockedMessage:%{self.resource.磷火}
+isVisible:if self.resource.磷火 > 0
+requireConditional:if self.hp < self.maxHp*0.9
+addResourcesWithLogic:hp = - self.resource.磷火
+spawnEffects:磷火*10
 
-# [hiddenAction_磷火消逝]
-# requireConditional:if (self.hp >= self.maxHp*0.9 or self.isInWater() or self.tags(includes='免疫debuff')) and self.resource.磷火>0
-# setResourcesWithLogic: 磷火=0
+[hiddenAction_磷火消逝]
+requireConditional:if (self.hp >= self.maxHp*0.9 or self.isInWater() or self.tags(includes='免疫debuff')) and self.resource.磷火>0
+setResourcesWithLogic: 磷火=0
 
-# [hiddenAction_磷火传染]
-# requireConditional:if self.hp < self.maxHp*0.5
-# takeResources: 磷火=-5
-# takeResources_maxUnits:1000
-# takeResources_discardCollected:true
-# takeResources_includeUnitsWithinRange: 200
-# takeResources_includeUnitsWithinRange_team:any
+[hiddenAction_磷火传染]
+requireConditional:if self.hp < self.maxHp*0.5
+takeResources: 磷火=-5
+takeResources_maxUnits:1000
+takeResources_discardCollected:true
+takeResources_includeUnitsWithinRange: 200
+takeResources_includeUnitsWithinRange_team:any
 
-# [effect_磷火]
-# image:ROOT:暗夜军\陆军\T3\磷火坦克\磷火.png
-# xOffsetAbsoluteRandom:${core.radius}
-# yOffsetAbsoluteRandom:${core.radius}
-# ySpeedAbsolute:-1
-# life:60
+[effect_磷火]
+image:ROOT:暗夜军\陆军\T3\磷火坦克\磷火.png
+xOffsetAbsoluteRandom:${core.radius}
+yOffsetAbsoluteRandom:${core.radius}
+ySpeedAbsolute:-1
+life:60
 
 [resource_融毁]
 hidden:true
