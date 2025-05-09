@@ -469,15 +469,15 @@ hidden:true
 
 [hiddenAction_接收融毁]
 autoTriggerOnEvent:tookDamage(withTag='融毁')
-setResourcesWithLogic:融毁=min(5,self.resource.融毁) 
+setResourcesWithLogic:融毁=min(5,self.resource.融毁+1) 
 
 [hiddenAction_融毁解除]
-autoTrigger:if self.resource.融毁 > 0
+autoTrigger:if self.resource.融毁 > 0 and not self.isAttacking()
 addResources:融毁=-1
 
 [hiddenAction_融毁扣血]
 autoTriggerOnEvent:tookDamage
-addResourcesWithLogic=hp=-10*self.resource.融毁
+addResourcesWithLogic:hp=-10*self.resource.融毁
 
 [action_等级调试+1]
 text:等级+1
