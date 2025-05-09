@@ -29,7 +29,7 @@ setUnitMemory:"""
 初始速度乘=customTarget1.readUnitMemory('初始速度乘',type='float'),
 初始范围加=customTarget1.readUnitMemory('初始范围加',type='float'),
 初始范围乘=customTarget1.readUnitMemory('初始范围乘',type='float')"""
-alsoTriggerAction:技能1
+#alsoTriggerAction:技能1
 
 [action_同步改造]
 #血盾比正为血变盾负为盾变血
@@ -55,7 +55,7 @@ setUnitMemory:"""
 初始速度乘=customTarget1.readUnitMemory('初始速度乘',type='float'),
 初始范围加=customTarget1.readUnitMemory('初始范围加',type='float'),
 初始范围乘=customTarget1.readUnitMemory('初始范围乘',type='float')"""
-alsoTriggerAction:技能1
+#alsoTriggerAction:技能1
 
 [action_领袖意志]
 pos:1000

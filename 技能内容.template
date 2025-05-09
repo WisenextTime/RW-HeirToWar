@@ -38,6 +38,8 @@ setUnitMemory:血量乘=memory.血量乘+0.1,护盾乘=memory.护盾乘+0.1,伤�
 @define idb:0
 @define l:100
 @define r:101
+
+#该技能已停用
 [hiddenAction_技能1]
 #setUnitMemory:"""unique[${id}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,
 setUnitMemory:"""unique[${id}]=true,
@@ -337,20 +339,20 @@ price:exp=0
 buildSpeed:10s
 #whenBuilding_cannotMove:true
 setUnitMemory:"""unique[11]=false,unique[12]=false,unique[21]=false,unique[22]=false,unique[31]=false,unique[32]=false,unique[41]=false,unique[42]=false,unique[51]=false,unique[52]=false,unique[61]=false,unique[62]=false,unique[71]=false,unique[72]=false,unique[81]=false,unique[82]=false,unique[91]=false,unique[92]=false,unique[101]=false,unique[102]=false,uniqueb[0]=false,uniqueb[1]=false,uniqueb[2]=false,uniqueb[3]=false,uniqueb[4]=false,uniqueb[5]=false,uniqueb[6]=false,uniqueb[7]=false,uniqueb[8]=false,uniqueb[9]=false,uniqueb[10]=false,N=memory.N-memory.NR,NR=0,
-血量加=memory.初始血量加,
-血量乘=memory.初始血量乘,
-回血加=memory.初始回血加,
-回血乘=memory.初始回血乘,
-护盾加=memory.初始护盾加,
-护盾乘=memory.初始护盾乘,
-回盾加=memory.初始回盾加,
-回盾乘=memory.初始回盾乘,
-伤害乘=memory.初始伤害乘,
-攻速加=memory.初始攻速加,
-速度加=memory.初始速度加,
-速度乘=memory.初始速度乘,
-范围加=memory.初始范围加,
-范围乘=memory.初始范围乘"""
+血量加=0,
+血量乘=0,
+回血加=0,
+回血乘=0,
+护盾加=0,
+护盾乘=0,
+回盾加=0,
+回盾乘=0,
+伤害乘=0,
+攻速加=0,
+速度加=0,
+速度乘=0,
+范围加=0,
+范围乘=0"""
 setResourcesWithLogic:unique=0
 isVisible:if self.tags(includes='技能展开')
 displayType:action

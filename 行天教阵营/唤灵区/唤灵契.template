@@ -1,6 +1,10 @@
 [core]
 soundOnDeath:ROOT:行天教阵营/音频区/灵死.ogg
 
+[hiddenAction_行天单位死亡]
+autoTriggerOnEvent:destroyed
+addResourcesWithLogic:信仰上限=memory.信仰占用,信仰=(self.resource.信仰*0.9)-self.resource.信仰
+
 [resource_唤灵]
 hidden:true
 displayName:唤灵

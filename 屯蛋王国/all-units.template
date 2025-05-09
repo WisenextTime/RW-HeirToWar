@@ -83,7 +83,7 @@ setUnitMemory:攻速加=memory.攻速加+0.01
 [hiddenAction_特化范围加]
 autoTrigger:if self.resource(type='特化',equalTo=13)
 addResources:特化=-13
-setUnitMemory:范围加=memory.范围加+10
+setUnitMemory:范围加=memory.范围加+5
 
 [hiddenAction_特化范围乘]
 autoTrigger:if self.resource(type='特化',equalTo=14)
