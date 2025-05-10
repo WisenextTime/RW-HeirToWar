@@ -32,6 +32,7 @@ deleteSelf:true
 allowMultipleInQueue:false
 
 #主动修复
+"""
 [action_北盟主动修复]
 isVisible:if self.globalTeamTags(includes='北九星')
 pos:999
@@ -45,3 +46,4 @@ isLockedAlt2:if numberOfUnitsInTeam(withTag='组装单位', lessThan=1, withInRa
 isLockedAlt2Message:需要附近有可支持维修的建筑或单位
 addResourcesWithLogic:hp=self.maxHp*0.35
 allowMultipleInQueue:false
+"""
