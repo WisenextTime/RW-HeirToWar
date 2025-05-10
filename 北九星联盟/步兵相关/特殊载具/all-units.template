@@ -1,13 +1,3 @@
 [core]
 copyFrom:ROOT:北九星联盟/步兵相关/all-units.template
 tags:步兵载具
-[action_回收单位]
-#isVisible:if 
-pos:999.1
-text:回收单位
-buildSpeed:8s
-description:回收单位获得90%资金和兵员
-isLocked:false
-#isLockedMessage:需要附近有可回收单位的建筑或单位
-addResourcesWithLogic:credits=(memory.price-100)*0.9,征召兵员=1
-deleteSelf:true

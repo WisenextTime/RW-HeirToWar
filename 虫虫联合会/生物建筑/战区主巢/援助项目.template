@@ -54,7 +54,7 @@ iconImage:招募“传信使”.png
 pos:996
 [action_招募“大虫后”]
 text:招募“大虫后”
-description:-[由于后方对这场战争有足够的重视一位“大虫后”应邀抵达前线]-\n-[大虫后可以操控复数个子个体并进行特殊的克隆]-
+description:-[由于后方对这场战争有足够的重视一位“大虫后”应邀抵达前线]-\n-[大虫后可以操控复数个子个体并进行特殊的克隆]-\n-[大虫后将在三个克隆喷射甲虫保护下抵达前线]
 buildSpeed:10s
 price:虫糖浆=700
 produceUnits:“大虫后”
@@ -74,31 +74,6 @@ iconImage:外籍接纳许可.png
 allowMultipleInQueue:false
 pos:996
 
-[action_外籍接纳许可]
-text:外籍接纳许可
-isVisible:if not self.globalTeamTags(includes='外籍接纳许可')
-isLocked:if self.globalTeamTags(includes='外籍接纳许可')
-isLockedMessage:已获得外籍接纳许可
-description:-[向主巢申请获取接纳外籍生物的许可]-\n-[这样一来我们就可以招募一些未加入虫联的生物为我们战斗]-
-buildSpeed:10s
-price:虫糖浆=300
-addGlobalTeamTags:外籍接纳许可
-iconImage:外籍接纳许可.png
-allowMultipleInQueue:false
-pos:996
-
-[action_虫联行天教]
-text:行天教信仰
-isVisible:if not self.globalTeamTags(includes='虫联行天教') and (numberOfUnitsInEnemyTeam(greaterThan=0) or numberOfUnitsInAllyNotOwnTeam(greaterThan=0))
-isLocked:if self.globalTeamTags(includes='虫联行天教')
-isLockedMessage:已获得行天教信仰
-description:-[了解行天教信仰解锁三个特殊单位]-\n-[特殊单位由撕咬虫，四翼飞虫，高脚骑士升级]-
-buildSpeed:10s
-price:虫糖浆=300
-addGlobalTeamTags:虫联行天教
-iconImage:虫联行天教.png
-allowMultipleInQueue:false
-pos:996
 """
 [action_科技解析行动]
 text:科技解析行动
@@ -122,7 +97,7 @@ isLockedAlt2:if self.numberOfUnitsInTeam(withTag="虫联工程师", lessThan=1) 
 isLockedAlt2Message:要求创始三虫至少各有一位活跃与战场
 description:-[创始三虫的安全入驻成功说服更多巢虫驻扎前线]-\n-[现在，我们可以将高阶虫巢升级为智能虫巢并建造全知节点]-
 buildSpeed:10s
-price:虫糖浆=100
+price:虫糖浆=200
 addGlobalTeamTags:虫巢智能
 iconImage:虫巢智能.png
 allowMultipleInQueue:false
@@ -133,9 +108,11 @@ text:兼职工作
 isVisible:if not self.globalTeamTags(includes='兼职工作')
 isLocked:if self.globalTeamTags(includes='兼职工作')
 isLockedMessage:已与企业家建立联系
+isLockedAlt2:if self.numberOfUnitsInTeam(withTag="虫联工程师", lessThan=1) or self.numberOfUnitsInTeam(withTag="虫联传信使", lessThan=1) or self.numberOfUnitsInTeam(withTag="虫联大虫后", lessThan=1)
+isLockedAlt2Message:要求创始三虫至少各有一位活跃与战场
 description:-[与后方企业家建立联系承包一些生产项目]-\n-[现在，所有虫巢将能获取一定收入]-
 buildSpeed:10s
-price:虫糖浆=1000
+price:虫糖浆=200
 addGlobalTeamTags:兼职工作
 iconImage:兼职工作.png
 allowMultipleInQueue:false

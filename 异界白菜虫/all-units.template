@@ -16,12 +16,23 @@ isVisible:if not self.hasFlag(id=10)
 isActive:true
 canPlayerCancel:true
 text:主动回收
-description:主动回收该单位100%的价格\n死亡则会回收80%资金20%凝聚力和2.5%DNA\n巨虫DNA获取翻倍爬虫20%额外凝聚力\n主动回收会回收所有可继承经验到全局
+description:主动回收该单位100%的价格\n死亡则会回收80%资金30%凝聚力和2.5%DNA\n巨虫DNA获取翻倍爬虫30%额外凝聚力\n主动回收会回收所有可继承经验到全局
 buildSpeed:${core.price*0.001+5}s
 pos:0.7
 iconImage:ROOT:全局\白菜虫\回收.png
-addResourcesWithLogic:
 addResourcesWithLogic:虫群记忆=self.resource.Rexp,credits=${core.price*1}
+convertTo:空气
+
+[action_主动摧毁]
+isVisible:if self.hasFlag(id=10)
+isActive:true
+canPlayerCancel:true
+text:主动摧毁
+description:有时候你不得不摧毁多余的单位\n摧毁回收10%价值凝聚力和2%DNA\n主动回摧毁回收所有可继承经验到全局
+buildSpeed:${core.price*0.001+5}s
+pos:0.7
+iconImage:ROOT:全局\白菜虫\回收.png
+addResourcesWithLogic:虫群记忆=self.resource.Rexp,DNA=int(${core.price*0.02}),PP=${core.price*0.1}
 convertTo:空气
 
 [hiddenAction_被动回收]
@@ -31,7 +42,7 @@ addResourcesWithLogic:credits=int(${core.price*0.80})
 [hiddenAction_获得DNA]
 requireConditional:if eventSource!=self
 autoTriggerOnEvent:destroyed
-addResourcesWithLogic:DNA=int(${core.price*0.025}),虫群记忆=self.resource.Rexp
+addResourcesWithLogic:DNA=int(${core.price*0.025})
 [hiddenAction_获得PP]
 #requireConditional:if eventSource!=self and not self.hasFlag(id=10)
 autoTriggerOnEvent:destroyed

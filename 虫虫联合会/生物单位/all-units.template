@@ -21,6 +21,17 @@ isLocked:if memory.子个体m<=memory.子个体
 isLockedMessage:子个体数量上限
 allowMultipleInQueue: false
 
+[action_回收子个体]
+isVisible:if self.hasFlag(id=10)
+isActive:true
+canPlayerCancel:true
+text:回收子个体
+description:回收子个体获取50%价值生物质\n其实我不明白为什么要回收
+buildSpeed:${core.price*0.001+5}s
+pos:0.7
+iconImage:ROOT:全局\白菜虫\回收.png
+deleteSelf:true
+
 #体型标记 倍率变化
 #S 血量-0.2 伤害-0.1 攻速+0.3 (输出1.17)
 #M 血量+0.0 伤害+0.0 攻速+0.0 (输出1.00)
