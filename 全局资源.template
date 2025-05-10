@@ -1,4 +1,5 @@
 #铁锈军————————————
+#每单位经验价值约0.1
 [global_resource_陆军经验显示]
 displayName:陆军经验
 iconImage:ROOT:全局/铁锈/陆军经验.png

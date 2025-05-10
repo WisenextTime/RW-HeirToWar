@@ -1,0 +1,25 @@
+[action_外籍接纳许可]
+text:外籍接纳许可
+isVisible:if not self.globalTeamTags(includes='外籍接纳许可')
+isLocked:if self.globalTeamTags(includes='外籍接纳许可')
+isLockedMessage:已获得外籍接纳许可
+description:-[向主巢申请获取接纳外籍生物的许可]-\n-[这样一来我们就可以招募一些未加入虫联的生物为我们战斗]-
+buildSpeed:10s
+price:虫糖浆=200
+addGlobalTeamTags:外籍接纳许可
+iconImage:外籍接纳许可.png
+allowMultipleInQueue:false
+pos:996
+
+[action_虫联行天教]
+text:行天教信仰
+isVisible:if not self.globalTeamTags(includes='虫联行天教') and (numberOfUnitsInEnemyTeam(greaterThan=0) or numberOfUnitsInAllyNotOwnTeam(greaterThan=0))
+isLocked:if self.globalTeamTags(includes='虫联行天教')
+isLockedMessage:已获得行天教信仰
+description:-[了解行天教信仰解锁四个特殊单位]-\n-[特殊单位由撕咬虫，四翼飞虫，高脚骑士,六足巨蛛升级]-
+buildSpeed:10s
+price:虫糖浆=300
+addGlobalTeamTags:虫联行天教
+iconImage:虫联行天教.png
+allowMultipleInQueue:false
+pos:996
