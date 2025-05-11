@@ -38,25 +38,25 @@ setUnitMemory:血量乘=memory.血量乘+0.1,护盾乘=memory.护盾乘+0.1,伤�
 @define idb:0
 @define l:100
 @define r:101
-[hiddenAction_技能1]
-"""
-#setUnitMemory:"""unique[${id}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,
-setUnitMemory:"""unique[${id}]=true,
-血量加=memory.血量加+memory.初始血量加,
-血量乘=memory.血量乘+memory.初始血量乘,
-回血乘=memory.回血乘+memory.初始回血乘,
-护盾加=memory.护盾加+memory.初始护盾加,
-护盾乘=memory.护盾乘+memory.初始护盾乘,
-回盾加=memory.回盾加+memory.初始回盾加,
-回盾乘=memory.回盾乘+memory.初始回盾乘,
-伤害乘=memory.伤害乘+memory.初始伤害乘,
-攻速加=memory.攻速加+memory.初始攻速加,
-速度加=memory.速度加+memory.初始速度加,
-速度乘=memory.速度乘+memory.初始速度乘,
-范围加=memory.范围加+memory.初始范围加,
-范围乘=memory.范围乘+memory.初始范围乘"""
-@define id:1
-"""
+# [hiddenAction_技能1]
+
+# setUnitMemory:unique[${id}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,
+# setUnitMemory:"""unique[${id}]=true,
+# 血量加=memory.血量加+memory.初始血量加,
+# 血量乘=memory.血量乘+memory.初始血量乘,
+# 回血乘=memory.回血乘+memory.初始回血乘,
+# 护盾加=memory.护盾加+memory.初始护盾加,
+# 护盾乘=memory.护盾乘+memory.初始护盾乘,
+# 回盾加=memory.回盾加+memory.初始回盾加,
+# 回盾乘=memory.回盾乘+memory.初始回盾乘,
+# 伤害乘=memory.伤害乘+memory.初始伤害乘,
+# 攻速加=memory.攻速加+memory.初始攻速加,
+# 速度加=memory.速度加+memory.初始速度加,
+# 速度乘=memory.速度乘+memory.初始速度乘,
+# 范围加=memory.范围加+memory.初始范围加,
+# 范围乘=memory.范围乘+memory.初始范围乘
+# @define id:1
+
 [hiddenAction_技能11]
 requireConditional:if (memory.random>=${l} and memory.random<${r}) and not memory.uniqueb[${idb}]
 setUnitMemory:unique[${id}]=true,uniqueb[${idb}]=true,uniqueN[${id}]=memory.N,N=memory.N+1,NR=memory.NR+1

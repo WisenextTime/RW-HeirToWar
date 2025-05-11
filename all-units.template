@@ -105,7 +105,7 @@ setUnitMemory:"""
 初始速度乘=customTarget1.readUnitMemory('初始速度乘',type='float'),
 初始范围加=customTarget1.readUnitMemory('初始范围加',type='float'),
 初始范围乘=customTarget1.readUnitMemory('初始范围乘',type='float')"""
-alsoTriggerAction:技能1
+# alsoTriggerAction:技能1
 
 [action_等级]
 text:当前等级 %{self.resource.level}
